@@ -1,6 +1,6 @@
 ---
 lang: en
-title: 'Creating an Express Application with LoopBack REST API'
+title: 'Loopback REST APIでExpress Applicationを構築する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
 permalink: /doc/en/lb4/express-with-lb4-rest-tutorial.html
@@ -9,42 +9,33 @@ summary: A simple Express application with LoopBack 4 REST API
 
 ## Overview
 
-[Express](https://expressjs.com) is an unopinionated Node.js framework. LoopBack
-REST API can be mounted to an Express application and be used as middleware.
-This way the user can mix and match features from both frameworks to suit their
-needs.
+[Express](https://expressjs.com) は、特定の形式に固執しないNode.jsのフレームワークです。 LoopBack REST APIは、Expressアプリケーションにマウントして、ミドルウェアとして使用できます。こうして、ユーザーはニーズに合わせて両方のフレームワークの機能を組み合わせることが可能です。
 
 {% include note.html content="
-If you want to use LoopBack as the host instead and mount your Express
-application on a LoopBack 4 application, see
-[Mounting an Express Router](Routes.md#mounting-an-express-router).
-" %}
+ホストとしてLoopBackを使用し、LoopBack4アプリケーションにExpressアプリケーションをマウントする場合は、[Express Routerのマウント](Routes.md#mounting-an-express-router)を参照してください 。
+ %}
 
-This tutorial assumes familiarity with scaffolding a LoopBack 4 application,
-[`Models`](Model.md), [`DataSources`](DataSources.md),
-[`Repositories`](Repositories.md), and [`Controllers`](Controllers.md). To see
-how they're used in a LoopBack application, please see the
-[`Todo` tutorial](todo-tutorial.md).
+このチュートリアルでは、LoopBack 4アプリケーションの土台・['モデル']・['データソース']・['レポジトリ']・['コントローラー']の背景知識があることを前提としています。各機能のアプリ内での働きについては、[`Todo` チュートリアル](todo-tutorial.md)をご参照ください.
+
 
 ## Try it out
 
-If you'd like to see the final results of this tutorial as an example
-application, follow these steps:
+先に、このチュートリアルの最終結果である、アプリケーション例を見たい場合は、次の手順に従ってください。
 
-1.  Run the `lb4 example` command to select and clone the express-composition
-    repository:
+
+1.  `lb4 example` コマンドを実行、エクスプレス構成リポジトリを選択してクローンを作成します。
 
     ```sh
     lb4 example express-composition
     ```
 
-2.  Switch to the directory.
+2.  ディレクトリを切り替えます。
 
     ```sh
     cd loopback4-example-express-composition
     ```
 
-3.  Finally, start the application!
+3.  アプリケーションを起動します
 
     ```sh
     $ npm start
@@ -52,12 +43,11 @@ application, follow these steps:
     Server is running at http://127.0.0.1:3000
     ```
 
-## Create your LoopBack Application
+## LoopBackアプリケーションを作成する
 
-### Scaffold your Application
+### 土台の構築
 
-Run `lb4 app note` to scaffold your application and fill out the following
-prompts as follows:
+`lb4 app note` を実行し、下記のプロンプトを入力してアプリケーションの土台を作成します。
 
 ```sh
 $ lb4 app note
@@ -76,27 +66,23 @@ $ lb4 app note
  Application note was created in note.
 ```
 
-### Add Note Model
+### Note モデルを追加する
 
-Inside the project folder, run `lb4 model` to create the `Note` model with
-`Entity` model base class. Add an `id` property with type `number`, a required
-`title` property with type `string`, and a `content` property of type `string`.
+プロジェクトフォルダー内で`lb4 model`を実行し、`Note`モデルを構築します。`id`プロパティのデータ型は`number`、`title`プロパティは`string`、`content`プロパティは`string`で`Entity`を作成します。
 
-### Add a DataSource
 
-Now, let's create a simple in-memory datasource by running the
-`lb4 datasource ds` command and the following full path to file:
-`./data/ds.json`.
+### データソースを追加する
 
-Similar to the `Todo` example, let's create the `ds.json` by creating a data
-folder at the application's root.
+`lb4 datasource ds`コマンドと`./data/ds.json`ファイルパスを実行して、メモリ内データソースを作成します。
+
+`Todo` チュートリアルの例と同様、アプリケーションのルート内にデータフォルダを作成し、`ds.json`を作成します。　
 
 ```sh
 $ mkdir data
 $ touch data/ds.json
 ```
 
-Then copy and paste the following into the `ds.json` file:
+次に、以下をコピーして`ds.json`ファイルに貼り付けます。
 
 ```json
 {
@@ -112,21 +98,19 @@ Then copy and paste the following into the `ds.json` file:
 }
 ```
 
-### Add Note Repository
+###  Note レポジトリを追加する
 
 To create the repository, run the `lb4 repository` command and choose the
 `DsDataSource`, as the datasource, `Note` model as the model, and
 `DefaultCrudRepository` as the repository base class.
 
-### Add Note Controller
+### Note コントローラーを追加する
 
-To complete the `Note` application, create a controller using the
-`lb4 controller note` command, with the `REST Controller with CRUD functions`
-type, `Note` model, and `NoteRepository` repository. The `id`'s type will be
-`number` and base HTTP path name is the default `/notes`.
+`lb4 controller note`コマンドを実行して、Noteアプリケーションを完了させます。各項目で、`REST Controller with CRUD functions` タイプ、`Note`モデル、および`NoteRepository`リポジトリを選択します。`id`タイプのデータ型は`number`、ベースHTTPパス名は、デフォルトの`/notes`を選択します。
 
-## Create a Facade Express Application
+## Facade Express アプリケーションを作成する
 
+まず、`express`モジュールの依存関係をインストールします。
 Let's start by installing dependencies for the `express` module:
 
 ```sh
@@ -134,7 +118,7 @@ npm install --save express
 npm install --save-dev @types/express
 ```
 
-Create a new file **src/server.ts** to create your Express class:
+新しいクラス**src/server.ts**を作成して、Express classを作成します。
 
 {% include code-caption.html content="src/server.ts" %}
 
@@ -146,8 +130,7 @@ export class ExpressServer {
 }
 ```
 
-Create two properties, the Express application instance and LoopBack application
-instance:
+Expressアプリケーションインスタンスと、LoopBackアプリケーションインスタンスの2つのプロパティを作成します。
 
 ```ts
 import {NoteApplication} from './application';
@@ -165,14 +148,13 @@ export class ExpressServer {
 }
 ```
 
-Now, inside the constructor, we're going to add the basepath and expose the
-front-end assets via Express:
+次に、コンストラクター内でベースパスを追加し、Expressを介してフロントエンドアセットを公開します。
 
 ```ts
 this.app.use('/api', this.lbApp.requestHandler);
 ```
-
-Let's also modify **public/index.html** to update the base path:
+ 
+**public/index.html** を修正して、base pathを更新します。
 
 {% include code-caption.html content="public/index.html" %}
 
@@ -181,7 +163,7 @@ Let's also modify **public/index.html** to update the base path:
 <h3>API Explorer: <a href="/api/explorer">/explorer</a></h3>
 ```
 
-Then, we can add some custom Express routes, as follows:
+カスタムExpressルートも、以下の通り追加します。
 
 ```ts
 import {Request, Response} from 'express';
@@ -205,19 +187,16 @@ export class ExpressServer {
 }
 ```
 
-And add the
-[public/express.html](https://github.com/strongloop/loopback-next/blob/master/examples/express-composition/public/express.html)
-file to your project.
+また、[public/express.html](https://github.com/strongloop/loopback-next/blob/master/examples/express-composition/public/express.html)
+ファイルをプロジェクトに追加します。
 
-Let's also install [`p-event`](https://www.npmjs.com/package/p-event) to make
-sure the server is listening:
+[`p-event`](https://www.npmjs.com/package/p-event) をインストールし、サーバーがListenしているか確認しましょう。
 
 ```sh
 npm install --save p-event
 ```
 
-Finally, we can add functions to boot the `Note` application and start the
-Express application:
+最後に、 `Note` applicationとExpressアプリケーションを起動する機能を追加しましょう。 
 
 ```ts
 import pEvent from 'p-event';
@@ -253,8 +232,7 @@ export class ExpressServer {
 }
 ```
 
-Now that our **src/server.ts** file is ready, then we can modify our
-**src/index.ts** file to start the application:
+**src/server.ts** ファイルは準備完了しました。**src/index.ts** を修正して、アプリケーションを起動させましょう。
 
 {% include code-caption.html content="src/index.ts" %}
 
@@ -300,10 +278,8 @@ if (require.main === module) {
 }
 ```
 
-Please note `listenOnStart` is set to `false` to instruct the LB4 application is
-not listening on HTTP when it's started as the Express server will be listening.
-
-Now let's start the application and visit <http://127.0.0.1:3000>:
+[注意]Expressサーバーを`Listen`させるためにLB4アプリケーションを起動した際に、LB4 アプリケーションがHTTPを`Listen`しないようにするために、`listenOnStart`が `false` に設定されていることを確認してください。　
+それでは、アプリケーションを起動してhttp://127.0.0.1:3000にアクセスしてみましょう。
 
 ```sh
 npm start
@@ -311,15 +287,18 @@ npm start
 Server is running at http://127.0.0.1:3000
 ```
 
-If we go to the [Explorer](http://127.0.0.1:3000/api/explorer), we can make
-requests for our LoopBack application. Notice how the server is
-<http://127.0.0.1:3000/api>.
 
-To view our custom `/hello` Express route, go to <http://127.0.0.1:3000/hello>
-and you should see 'Hello world!'.
+我々はに行けばエクスプローラ、私たちはループバックアプリケーションの要求を行うことができます。サーバーがhttp://127.0.0.1:3000/apiであることに注意してください 。
 
-To serve static files in your application, add the following to the end of your
-constructor:
+カスタム/helloエクスプレスルートを表示するには、http：//127.0.0.1：3000 / hello にアクセスすると、「Hello world！」が表示されます。
+
+アプリケーションで静的ファイルを提供するには、コンストラクタの最後に次を追加します。
+
+[Explorer](http://127.0.0.1:3000/api/explorer)を開くと、 Loopbackアプリケーションからリクエストを送ることができます。サーバーは<http://127.0.0.1:3000/api>です。
+
+カスタムの`/hello` Expressルートを表示するには、<http://127.0.0.1:3000/hello>を開いて'Hello world!'を確認します。
+
+アプリケーションで静的ファイルを提供するには、コンストラクタの最後に次の記述を追加します。
 
 {% include code-caption.html content="src/server.ts" %}
 
@@ -339,13 +318,8 @@ export class ExpressServer {
 }
 ```
 
-Now, you can load any static files in the **public/** folder. For example, add
-the following
-[public/notes.html](https://github.com/strongloop/loopback-next/blob/master/examples/express-composition/public/notes.html)
-file to your project, run `npm start` again, and visit
-<http://127.0.0.1:3000/notes.html>. You can now see a static file that will
-display your Notes in a table format. For more information, please visit
-[Serving static files in Express](https://expressjs.com/en/starter/static-files.html).
+これで、**public/**フォルダーに静的ファイルをロードできます。
+一例として、[public/notes.html](https://github.com/strongloop/loopback-next/blob/master/examples/express-composition/public/notes.html)のファイルをプロジェクトに追加して`npm start`し、<http://127.0.0.1:3000/notes.html>を開いてみてください。メモを表形式で表示する静的ファイルを確認できます。詳細は、[Serving static files in Express](https://expressjs.com/en/starter/static-files.html)をご参照ください。
 
-Congratulations, you just mounted LoopBack 4 REST API onto a simple Express
-application.
+お疲れ様でした。LoopBack4 REST APIをExpressアプリケーションにマウントできました。
+
