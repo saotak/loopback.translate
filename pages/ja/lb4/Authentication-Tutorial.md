@@ -7,29 +7,21 @@ permalink: /doc/en/lb4/Authentication-Tutorial.html
 summary: A LoopBack 4 application that uses JWT authentication
 ---
 
-## Overview
+## 概観
 
-LoopBack 4 has an authentication package `@loopback/authentication` which allows
-you to secure your application's API endpoints with custom authentication
-strategies and an `@authenticate` decorator.
+LoopBack 4には、カスタム認証ストラテジと認証デコレーター`@authenticate`を使用して、
+アプリケーションのAPIエンドポイントを保護できる認証パッケージ`@loopback/authentication`があります。
 
-This tutorial showcases how `authentication` was added to the
-[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)
-application by **creating** and **registering** a custom authentication strategy
-based on the `JSON Web Token (JWT)` approach.
+このチュートリアルでは、 `JSON Web Token (JWT)`アプローチに基づいて、カスタム認証戦略を**作成**および**登録**することにより、`authentication`が、[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)アプリケーションにどのように追加されたかを紹介します。
 
-Here is a brief summary of the `JSON Web Token (JWT)` approach.
+以下で、JSON Web Token (JWT)アプローチの簡単なサマリを示しています。
 
 ![JSON Web Token Authentication Overview](../../imgs/json_web_token_overview.png)
 
-In the **JSON Web Token (JWT)** authentication approach, when the user provides
-the **correct** credentials to a **login** endpoint, the server creates a JWT
-token and returns it in the response. The token is of type **string** and
-consists of 3 parts: the **header**, the **payload**, and the **signature**.
-Each part is encrypted using a **secret**, and the parts are separated by a
-period.
+**JSON Web Token (JWT)** 認証方式で、ユーザーが**正しい資格情報**を**ログイン**エンドポイントに提供する場合、サーバーは、JWTトークンを作成し応答を返します。
+トークンは**文字列型**で、次の3つの部分：**ヘッダー**・**ペイロード**・**シグニチャー** で構成されます。各部分は**シークレット**を使用して暗号化され、各部分はピリオドで区切られます。
 
-For example:
+例:
 
 ```ts
 // {encrypted-header}.{encrypted-payload}.{encrypted-signature}
@@ -37,32 +29,23 @@ eyJhbXVCJ9.eyJpZCI6Ij.I3wpRNCH4;
 // actual parts have been reduced in size for viewing purposes
 ```
 
-{% include note.html content="The payload can contain anything
-the application developer wants, but at the very least contains the user id. It should never contain the user password." %}
+{% include note.html content=" 注：ペイロードには、開発者が望むものを何でも含めることができますが、少なくともユーザーIDは含まれることが必須です。また、ユーザーパスワードを含めることはできません。
+" %}
 
-After logging in and obtaining this token, whenever the user attempts to access
-a protected endpoint, the token must be provided in the **Authorization**
-header. The server verifies that the token is valid and not expired, and then
-permits access to the protected endpoint.
+ログインしてこのトークンを取得した後、ユーザーが保護されたエンドポイントにアクセスしようとするときは常に、トークンを**Authorization**ヘッダーで提供する必要があります。サーバーは、トークンが有効で期限切れでないことを確認し、保護されたエンドポイントへのアクセスを許可します。
 
-Please see [JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token)
-for more details.
+詳細については、[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token)を参照してください。
 
-To view and run the completed `loopback4-example-shopping` application, follow
-the instructions in the [Try it out](#try-it-out) section.
+完成したl`loopback4-example-shopping` アプリケーションを表示して実行するには、[Try it out](#try-it-out) セクションの指示に従ってください。
 
-To understand the details of how JWT authentication can be added to a LoopBack 4
-application, read the
-[Adding JWT Authentication to a LoopBack 4 Application](#adding-jwt-authentication-to-a-loopback-4-application)
-section.
+LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を理解するには、[Adding JWT Authentication to a LoopBack 4 Application](#adding-jwt-authentication-to-a-loopback-4-application) セクションをお読みください。
+
 
 ## Try it out
 
-If you'd like to see the final results of this tutorial as an example
-application, follow these steps:
+このチュートリアルの最終結果をアプリケーション例として見たい場合は、次の手順に従ってください。
 
-1. Start the application:
-
+1. アプリケーションを開始します。
    ```sh
    git clone https://github.com/strongloop/loopback4-example-shopping.git
    cd loopback4-example-shopping
@@ -71,7 +54,7 @@ application, follow these steps:
    npm start
    ```
 
-   Wait until you see:
+   次の表示が出るまで待ちます:
 
    ```sh
    Recommendation server is running at http://127.0.0.1:3001.
@@ -79,12 +62,10 @@ application, follow these steps:
    Try http://[::1]:3000/ping
    ```
 
-1. In a browser, navigate to [http://[::1]:3000](http://127.0.0.1:3000) or
-   [http://127.0.0.1:3000](http://127.0.0.1:3000), and click on `/explorer` to
-   open the `API Explorer`.
+1. ブラウザで [http://[::1]:3000](http://127.0.0.1:3000) または
+   [http://127.0.0.1:3000](http://127.0.0.1:3000)を開き、`/explorer`をクリックして`API Explorer`を開きます。
 
-1. In the `UserController` section, click on `POST /users`, click on
-   `'Try it out'`, specify:
+2. `UserController`セクションでは,`POST /users`、さらに`'Try it out'`をクリックして, 以下を指定します:
 
    ```json
    {
@@ -94,8 +75,8 @@ application, follow these steps:
      "lastName": "One"
    }
    ```
-
-   and click on `'Execute'` to **add** a new user named `'User One'`.
+　をクリックし'Execute'て、という名前の新しいユーザーを追加します'User One'。
+  `'Execute'` をクリックして、`'User One'`という値の夕方を**追加**します。
 
 1. In the `UserController` section, click on `POST /users/login`, click on
    `'Try it out'`, specify:

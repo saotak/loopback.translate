@@ -6,18 +6,12 @@ sidebar: lb4_sidebar
 permalink: /doc/en/lb4/Crafting-LoopBack-4.html
 ---
 
-## Background
+##  バックグラウンド
 
-[LoopBack](http://loopback.io) is an open-source [Node.js](https://nodejs.org)
-framework built for API developers. Its primary goal is to help create APIs as
-microservices from existing services/databases and expose them as endpoints for
-client applications, such as web, mobile, and IoT. LoopBack connects the dots
-between accepting API requests and interacting with backend resources. By
-facilitating developers to implement API logic with out of box integration
-capabilities, LoopBack establishes itself as the API composition layer to
-[differentiate](http://loopback.io/resources/#compare) from other frameworks,
-such as [Express](https://expressjs.com), [Hapi](https://hapijs.com), and
-[Sails](http://sailsjs.com).
+[LoopBack](http://loopback.io)は、 API開発者向けに構築された、オープンソースの[Node.js](https://nodejs.org)のフレームワークです。主な目的は、既存のサービス/データベースからマイクロサービスとしてAPIを作成し、Web、モバイル、IoTなどのクライアントアプリケーションのエンドポイントとして公開することです。
+LoopBackは、APIリクエストの受け入れと、バックエンドリソースとのやり取りの間をつなぎます。
+Loopbackと他のフレームワークの違いは、開発者がすぐに使用できる統合機能を使用してAPIロジックを実装できる点です。これにより、LoopBackは[Express](https://expressjs.com)、[Hapi](https://hapijs.com)、 [Sails](http://sailsjs.com)などとは異なる、優れたAPI構成レイヤーとなっています。
+
 
 ![loopback-composition](./imgs/loopback-composition.png)
 
@@ -29,13 +23,17 @@ reinventing the wheel. LoopBack also has benefitted from the Express ecosystem,
 especially ready-to-use middleware modules from npm as well as valuable
 knowledge and support by the community.
 
-With LoopBack, developers can create and expose APIs just like following a
-recipe. LoopBack introduces a set of
-[core concepts](https://loopback.io/doc/en/lb3/LoopBack-core-concepts) that
-represent the key aspects of API implementation. To create APIs out of existing
-databases or services, developers can simply scaffold a LoopBack application,
-then add necessary JSON declarations and Node.js code to get their APIs up and
-running in a few minutes.
+LoopBackは、バージョン3.xまで、[Express framework](https://expressjs.com)に構築されました。
+結果的には、LoopBackをExpressに基づかせることは正しい決定でした。
+Expressの力を借りることで、LoopBackは、「車輪の再発明」のごとく既存システムの修正に手間取られることなく、API作成エクスペリエンスの価値を高めることに集中できました。
+LoopBackは、npmのすぐに使用できるミドルウェアモジュールなど、Expressのエコシステムやコミュニティによる知識とサポートの恩恵が受けられるのも魅力です。
+
+// ↑ここまで
+
+開発者はLoopBackを使用して、レシピに従うのと同じようにAPIを作成および公開できます。LoopBackは、API実装の重要な側面を表す一連のコアコンセプトを導入し ます。開発者は、既存のデータベースまたはサービスからAPIを作成するために、LoopBackアプリケーションを足場化し、必要なJSON宣言とNode.jsコードを追加して、APIを数分で起動して実行できます。
+
+LoopBackは、認証、承認、ルーティングなどのAPIユースケースの要求/応答パイプラインへの配管として、エクスプレスルーティングとミドルウェアを使用します。受信HTTP処理を超えて、LoopBackは、モデル、データソース、コネクタなどの統合機能を提供し、APIロジックがデータベース、REST API、SOAP Webサービス、gRPCマイクロサービスなどのさまざまなバックエンドシステムと対話できるようにします。インバウンド通信とアウトバウンド統合を結び付ける機能により、LoopBackはAPI開発者にとって非常に強力なフレームワークになります。下の図は、LoopBackが典型的なエンドツーエンドAPI処理フローにどのように適合するかを示しています。
+
 
 LoopBack uses Express routing and middleware as the plumbing to a
 request/response pipeline for API use cases, such as authentication,
