@@ -1,5 +1,5 @@
 ---
-lang: en
+lang: ja
 title: 'Loopback REST APIでExpress Applicationを構築する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar

@@ -143,11 +143,7 @@ In the `UserController` section, click on `POST /users/login`, click on
    ```
 
 ## LoopBack4アプリケーションへのJWT認証の追加
-
-In this section, we will demonstrate how `authentication` was added to the
-[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)
-application using the
-[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token) approach.
+このセクションでは 、[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token) ）アプローチを使用して、 どのように[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)アプリケーションに`authentication` が追加されたのかを示します。
 
 ### Installing @loopback/authentication
 
