@@ -75,10 +75,10 @@ LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を�
      "lastName": "One"
    }
    ```
-　をクリックし'Execute'て、という名前の新しいユーザーを追加します'User One'。
-  `'Execute'` をクリックして、`'User One'`という値の夕方を**追加**します。
+  `'Execute'` をクリックして、`'User One'`というユーザーを**追加**します。
 
-1. In the `UserController` section, click on `POST /users/login`, click on
+4. `UserController`セクションで、`POST /users/login`、`'Try it out'`をクリックし、以下を指定します。 
+In the `UserController` section, click on `POST /users/login`, click on
    `'Try it out'`, specify:
 
    ```json
@@ -88,11 +88,11 @@ LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を�
    }
    ```
 
-   and click on `'Execute'` to **log in** as `'User One'`.
+  `'Execute'`をクリックし、`'User One'`として**log in**します.
 
-   A JWT token is sent back in the response.
+   JWT トークンがレスポンスで返送されます。
 
-   For example:
+   例:
 
    ```json
    {
@@ -100,27 +100,31 @@ LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を�
    }
    ```
 
-1. Scroll to the top of the API Explorer, and you should see an `Authorize`
+5. API Explorerの上部までスクロールすると、`Authorize`ボタンが表示されます。これは、JWTトークンを設定できる場所です。
+　　Scroll to the top of the API Explorer, and you should see an `Authorize`
    button. This is the place where you can set the JWT token.
 
    ![](../../imgs/api_explorer_authorize_button.png)
 
-1. Click on the `Authorize` button, and a dialog opens up.
+6. `Authorize` ボタンをクリックすると、ダイアログが開きます。
 
    ![](../../imgs/api_explorer_auth_token_dialog1.png)
 
-1. In the `bearerAuth` value field, enter the token string you obtained earlier,
+7. `bearerAuth`値フィールドで、先ほど取得したトークン文字列を入力して、`Authorize`ボタンをクリックします。これで、このJWTトークンは、次に通信する`/users/me` エンドポイントで使用できるようになりました 。`Close` ボタンを押してダイアログを閉じます。
+　　In the `bearerAuth` value field, enter the token string you obtained earlier,
    and press the `Authorize` button. This JWT token is now available for the
    `/users/me` endpoint we will interact with next. Press the `Close` button to
    dismiss the dialog.
 
    ![](../../imgs/api_explorer_auth_token_dialog2.png)
 
-   {% include note.html content="The <b>Logout</b> button allows you to enter a new value; if needed." %}
+   {% include note.html content="<b>Logout</b> ボタンで、必要に応じいつでも新しい値を入力できます。" %}
 
-1. Scroll down to the `UserController` section to find `GET /users/me`
+１. `UserController` セクションまでスクロールダウンし、 `GET /users/me`を開けます。
 
    ![](../../imgs/api_explorer_usercontroller_section1.png)
+
+   なお、このエンドポイントには**lock**アイコンがありますが、同セクションの他のエンドポイントにはないことに注意してください。これは、このエンドポイントが、オペレーショナルレベルを`security requirement object` であるとOpenAPI仕様で指定したためです。（詳細については、[Specifying the Security Settings in the OpenAPI Specification](#specifying-the-security-settings-in-the-openapi-specification)をご参照ください。)
 
    Notice it has a **lock** icon and the other endpoints in this section do not.
    This is because this endpoint specified an operation-level
@@ -129,26 +133,16 @@ LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を�
    [Specifying the Security Settings in the OpenAPI Specification](#specifying-the-security-settings-in-the-openapi-specification)
    section.)
 
-1. Expand the `GET /users/me` section, and click on `Try it out`. There is no
-   data to specify, so simply click on `Execute`. The JWT token you specified
-   earlier was automatically placed in the `Authorization` header of the
-   request.
+2. `GET /users/me` セクションを展開し、`Try it out`をクリックします。指定するデータがないため、そのまま`Execute`します。先ほど指定したJWTトークン　　`Authorization` が、リクエストのヘッダーに自動的に配置されました。
 
-   If authentication succeeds, the
-   [user profile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)
-   of the currently authenticated user will be returned in the response. If
-   authentication fails due to a missing/invalid/expired token, an
-   [HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)
-   is thrown.
+  認証が成功すると、現在認証されているユーザーの[user profile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)がレスポンスとしてで返されます。トークンの欠落/無効/期限切れが原因で認証が失敗した場合、 [HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)が返されます。
 
-   The response contains a unique value in the `id` field (generated by the
-   database) and `name` field with the full user name:
-
+  応答には、（データベースによって生成される）`id`フィールドと、フルネームのユーザー名が入っている`name` フィールドに、それぞれ一意の値が含まれています。
    ```json
    {"id": "5dd6acee242760334f6aef65", "name": "User One"}
    ```
 
-## Adding JWT Authentication to a LoopBack 4 Application
+## LoopBack4アプリケーションへのJWT認証の追加
 
 In this section, we will demonstrate how `authentication` was added to the
 [loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)
