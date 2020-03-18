@@ -37,7 +37,8 @@ npm i --save openapi-to-graphql-cli
 npx openapi-to-graphql --port=3001 http://localhost:3000/openapi.json
 ```
 
-_ `npx` について馴染みがないでしょうか。`npm` とNode.js 8.x以降から提供される、便利なヘルパーです。詳細については、[Introducing npx: an npm package runner](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)をご参照ください。_
+_`npx` について馴染みがないでしょうか。`npm` とNode.js 8.x以降から提供される、便利なヘルパーです。詳細については、[Introducing npx: an npm package runner](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)をご参照ください。_
+
 
 完了です！これで、http：// localhost：3001 / graphqlのブラウザで、いくつかのテストとリクエストを試す準備ができました。
 

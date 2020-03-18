@@ -66,12 +66,16 @@ npm i -g @loopback/cli
 
 アプリケーションのコードを色々と試して、動作するかを確認してみてください。引き続き、アプリケーションの構築方法を学びたい場合は、このチュートリアルを続けてください。
 
+
+
 ### お困りですか？
  [Gitter channel](https://gitter.im/strongloop/loopback) を参照してください。
 
 ### バグ/フィードバック
 
 [loopback-next](https://github.com/strongloop/loopback-next)へお寄せください。
+
+
 
 ## 貢献する
 
