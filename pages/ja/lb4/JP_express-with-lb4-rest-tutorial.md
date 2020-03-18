@@ -68,7 +68,7 @@ $ lb4 app note
 
 ### Note モデルを追加する
 
-プロジェクトフォルダー内で`lb4 model`を実行し、`Note`モデルを構築します。`id`プロパティのデータ型は`number`、`title`プロパティは`string`、`content`プロパティは`string`で`Entity`を作成します。
+プロジェクトフォルダー内で `lb4 model`を実行し、`Note`モデルを構築します。`id`プロパティのデータ型は`number`、`title`プロパティは`string`、`content`プロパティは`string`で`Entity`を作成します。
 
 
 ### データソースを追加する
@@ -111,7 +111,6 @@ To create the repository, run the `lb4 repository` command and choose the
 ## Facade Express アプリケーションを作成する
 
 まず、`express`モジュールの依存関係をインストールします。
-Let's start by installing dependencies for the `express` module:
 
 ```sh
 npm install --save express
@@ -278,8 +277,10 @@ if (require.main === module) {
 }
 ```
 
-[注意]Expressサーバーを`Listen`させるためにLB4アプリケーションを起動した際に、LB4 アプリケーションがHTTPを`Listen`しないようにするために、`listenOnStart`が `false` に設定されていることを確認してください。　
-それでは、アプリケーションを起動してhttp://127.0.0.1:3000にアクセスしてみましょう。
+[注意]Expressサーバーを`Listen`させるためにLB4アプリケーションを起動した際、LB4 アプリケーションがHTTPを`Listen`しないようにするために、`listenOnStart`が `false` に設定されていることを確認してください。　
+
+それでは、アプリケーションを起動してhttp://127.0.0.1:3000
+にアクセスしてみましょう。
 
 ```sh
 npm start
@@ -288,7 +289,8 @@ Server is running at http://127.0.0.1:3000
 ```
 
 
-我々はに行けばエクスプローラ、私たちはループバックアプリケーションの要求を行うことができます。サーバーがhttp://127.0.0.1:3000/apiであることに注意してください 。
+我々はに行けばエクスプローラ、私たちはループバックアプリケーションの要求を行うことができます。サーバーがhttp://127.0.0.1:3000/api
+であることに注意してください 。
 
 カスタム/helloエクスプレスルートを表示するには、http：//127.0.0.1：3000 / hello にアクセスすると、「Hello world！」が表示されます。
 
