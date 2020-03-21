@@ -13,7 +13,7 @@ permalink: /doc/en/lb4/exposing-graphql-apis.html
 
 ### 前提条件
 
-実行中のLoopBack 4アプリケーションがあることを確認してください。このチュートリアルでは、 `todo` 例を使用します。以下のコマンドを実行して、このアプリケーションを作成できます。
+まず、実行中のLoopBack 4アプリケーションを用意してください。このチュートリアルでは、 `todo` exampleを使用します。以下のコマンドを実行して、このアプリケーションを作成しましょう。
 
 ```sh
 lb4 example todo

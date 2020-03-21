@@ -15,7 +15,7 @@ summary: A simple Express application with LoopBack 4 REST API
 ホストとしてLoopBackを使用し、LoopBack4アプリケーションにExpressアプリケーションをマウントする場合は、[Express Routerのマウント](Routes.md#mounting-an-express-router)を参照してください 。
  %}
 
-このチュートリアルでは、LoopBack 4アプリケーションの土台・['モデル']・['データソース']・['レポジトリ']・['コントローラー']の背景知識があることを前提としています。各機能のアプリ内での働きについては、[`Todo` チュートリアル](todo-tutorial.md)をご参照ください.
+このチュートリアルでは、LoopBack 4アプリケーションの土台・['モデル'](Model.md)・['データソース'](DataSources.md)・['レポジトリ'](Repositories.md)・['コントローラー'](Controllers.md)の背景知識があることを前提としています。各機能のアプリ内での働きについては、[`Todo` チュートリアル](todo-tutorial.md)をご参照ください.
 
 
 ## Try it out
@@ -68,7 +68,7 @@ $ lb4 app note
 
 ### Note モデルを追加する
 
-プロジェクトフォルダー内で `lb4 model`を実行し、`Note`モデルを構築します。`id`プロパティのデータ型は`number`、`title`プロパティは`string`、`content`プロパティは`string`で`Entity`を作成します。
+プロジェクトフォルダー内で`lb4 model`を実行し、`Note`モデルを構築します。`id`プロパティのデータ型は`number`、`title`プロパティは`string`、`content`プロパティは`string`で`Entity`を作成します。
 
 
 ### データソースを追加する
@@ -99,10 +99,10 @@ $ touch data/ds.json
 ```
 
 ###  Note レポジトリを追加する
-
-To create the repository, run the `lb4 repository` command and choose the
-`DsDataSource`, as the datasource, `Note` model as the model, and
-`DefaultCrudRepository` as the repository base class.
+ 
+ `lb4 repository`コマンドを実行して、リポジトリを作成します。
+データソースは `DsDataSource`、モデルは` Note`モデル、
+リポジトリのベースクラスは`DefaultCrudRepository` を選択します。
 
 ### Note コントローラーを追加する
 
@@ -289,10 +289,10 @@ Server is running at http://127.0.0.1:3000
 ```
 
 
-我々はに行けばエクスプローラ、私たちはループバックアプリケーションの要求を行うことができます。サーバーがhttp://127.0.0.1:3000/api
+[Explorer](http://127.0.0.1:3000/api/explorer)で、Loopbackアプリケーションへのリクエストを行うことができます。なお、サーバーはhttp://127.0.0.1:3000/api
 であることに注意してください 。
 
-カスタム/helloエクスプレスルートを表示するには、http：//127.0.0.1：3000 / hello にアクセスすると、「Hello world！」が表示されます。
+ `/hello`Expressルートを表示するには、<http://127.0.0.1:3000/hello>にアクセスしてください。「Hello world！」が表示されます。
 
 アプリケーションで静的ファイルを提供するには、コンストラクタの最後に次を追加します。
 
@@ -320,7 +320,7 @@ export class ExpressServer {
 }
 ```
 
-これで、**public/**フォルダーに静的ファイルをロードできます。
+これで、**public/** フォルダーに静的ファイルをロードできます。
 一例として、[public/notes.html](https://github.com/strongloop/loopback-next/blob/master/examples/express-composition/public/notes.html)のファイルをプロジェクトに追加して`npm start`し、<http://127.0.0.1:3000/notes.html>を開いてみてください。メモを表形式で表示する静的ファイルを確認できます。詳細は、[Serving static files in Express](https://expressjs.com/en/starter/static-files.html)をご参照ください。
 
 お疲れ様でした。LoopBack4 REST APIをExpressアプリケーションにマウントできました。
