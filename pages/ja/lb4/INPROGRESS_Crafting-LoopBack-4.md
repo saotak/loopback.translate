@@ -194,7 +194,8 @@ LoopBackは、モデル、関係、データソース、コネクター、ACL、
 
 スタック内の各機能領域の下に、共通のレイヤーがあることに注意してください。それでは、LoopBack 4の新しいコア基盤を構築する必要性を調べてみましょう。
 
-# 新しいコア基盤
+
+##新しいコア基盤
 
 ## 中心的な役割
 LoopBack自体はすでにモジュール化されています。たとえば、典型的なLoopBack 3.xアプリケーションの依存関係グラフには、次のnpmモジュールがあります。
@@ -263,7 +264,7 @@ LoopBack 4の中核となる基盤は、さまざまなアーティファクト�
 
 私たちは、Expressのエコシステムの幅広いコミュニティやミドルウェアを活用することができるように、ループバックを常にExpressの上に構築していました。**しかし**、それによりループバックにはいくつかの課題が残りました。LoopBack 4では、Expressからの移行（そしてExpressなしでフレームワークの構築までも）を検討しましたが、その広大なエコシステムのため、最終的にはExpressに戻りました。
 
-Expressが提供するものとLoopBackのニーズとのギャップは例えばこのようなものがあります。
+Expressが提供するものとLoopBackのニーズとのギャップは、例えばこのようなものがあります。
 
 - 拡張性の欠如
   >Expressはミドルウェア経由でのみ拡張可能です。レジストリを公開せず、ミドルウェアやルーターなどのアーティファクトを管理するためのAPIも提供しません。
@@ -283,6 +284,7 @@ LoopBackの主な目的は、CORSのミドルウェアや静的ファイルサ�
 - LoopBackは、[アクションのシーケンス](Sequence.md)を使用して、コンポーザブルな方法でレスポンスを作成し、`@loopback/context`をレジストリとして活用します。
 詳細については、[インバウンドHTTP処理の改善](https://strongloop.com/strongblog/loopback4-improves-inbound-http-processing)に関するブログ投稿をご覧ください 。
 
+
 ##LoopBack 4の拡張性の詳細
 
 LoopBack 4の拡張性を実現するには、いくつかの重要な柱があります。
@@ -299,6 +301,7 @@ Extending LoopBack 4をご覧ください
 - [Component](Using-components.md) : 拡張機能をバンドルするパッケージングモデルとしての機能
 
 詳しくは、 [Extending LoopBack 4](Extending-LoopBack-4.md)をご覧ください。
+
 
 ## 新しいコアの上にLoopBackエクスペリエンスを再構築する
 拡張可能な基盤が整ったら、次のアーティファクトで "Eat your own dog food" (自分のシステムを試してみる)ことにより、LoopBack REST APIエクスペリエンスの再構築を開始します。
@@ -326,7 +329,7 @@ Extending LoopBack 4をご覧ください
 ##アプリケーション開発者向けの例
 先に進む前に、LoopBack 4で「hello world」アプリケーションを構築してみましょう。
 
-###基本的なHello-World
+### 基本的なHello-World
 [@loopback/example-hello-world](https://github.com/strongloop/loopback-next/tree/master/examples/hello-world)
 
 ###中級の例
