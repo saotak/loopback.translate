@@ -18,7 +18,7 @@ LoopBack 4には、カスタム認証ストラテジと認証デコレーター`
 
 ![JSON Web Token Authentication Overview](../../imgs/json_web_token_overview.png)
 
-**JSON Web Token (JWT)** 認証方式で、ユーザーが**正しい資格情報**を**ログイン**エンドポイントに提供する場合、サーバーは、JWTトークンを作成し応答を返します。
+**JSON Web Token (JWT)** 認証方式で、Userが**正しい資格情報**を**ログイン**エンドポイントに提供する場合、サーバーは、JWTトークンを作成し応答を返します。
 トークンは**文字列型**で、次の3つの部分：**ヘッダー**・**ペイロード**・**シグニチャー** で構成されます。各部分は**シークレット**を使用して暗号化され、各部分はピリオドで区切られます。
 
 例:
@@ -29,10 +29,10 @@ eyJhbXVCJ9.eyJpZCI6Ij.I3wpRNCH4;
 // actual parts have been reduced in size for viewing purposes
 ```
 
-{% include note.html content=" 注：ペイロードには、開発者が望むものを何でも含めることができますが、少なくともユーザーIDは含まれることが必須です。また、ユーザーパスワードを含めることはできません。
+{% include note.html content=" 注：ペイロードには、開発者が望むものを何でも含めることができますが、少なくともUserIDは含まれることが必須です。また、Userパスワードを含めることはできません。
 " %}
 
-ログインしてこのトークンを取得した後、ユーザーが保護されたエンドポイントにアクセスしようとするときは常に、トークンを**Authorization**ヘッダーで提供する必要があります。サーバーは、トークンが有効で期限切れでないことを確認し、保護されたエンドポイントへのアクセスを許可します。
+ログインしてこのトークンを取得した後、Userが保護されたエンドポイントにアクセスしようとするときは常に、トークンを**Authorization**ヘッダーで提供する必要があります。サーバーは、トークンが有効で期限切れでないことを確認し、保護されたエンドポイントへのアクセスを許可します。
 
 詳細については、[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token)を参照してください。
 
@@ -41,7 +41,7 @@ eyJhbXVCJ9.eyJpZCI6Ij.I3wpRNCH4;
 LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を理解するには、[Adding JWT Authentication to a LoopBack 4 Application](#adding-jwt-authentication-to-a-loopback-4-application) セクションをお読みください。
 
 
-## Try it out
+## やってみましょう
 
 このチュートリアルの最終結果をアプリケーション例として見たい場合は、次の手順に従ってください。
 
@@ -75,7 +75,7 @@ LoopBack 4アプリケーションにJWT認証を追加する方法の詳細を�
      "lastName": "One"
    }
    ```
-  `'Execute'` をクリックして、`'User One'`というユーザーを**追加**します。
+  `'Execute'` をクリックして、`'User One'`というUserを**追加**します。
 
 4. `UserController`セクションで、`POST /users/login`、`'Try it out'`をクリックし、以下を指定します。 
 In the `UserController` section, click on `POST /users/login`, click on
@@ -135,9 +135,9 @@ In the `UserController` section, click on `POST /users/login`, click on
 
 2. `GET /users/me` セクションを展開し、`Try it out`をクリックします。指定するデータがないため、そのまま`Execute`します。先ほど指定したJWTトークン　　`Authorization` が、リクエストのヘッダーに自動的に配置されました。
 
-  認証が成功すると、現在認証されているユーザーの[user profile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)がレスポンスとしてで返されます。トークンの欠落/無効/期限切れが原因で認証が失敗した場合、 [HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)が返されます。
+  認証が成功すると、現在認証されているUserの[user profile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)がレスポンスとしてで返されます。トークンの欠落/無効/期限切れが原因で認証が失敗した場合、 [HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)が返されます。
 
-  応答には、（データベースによって生成される）`id`フィールドと、フルネームのユーザー名が入っている`name` フィールドに、それぞれ一意の値が含まれています。
+  応答には、（データベースによって生成される）`id`フィールドと、フルネームのUser名が入っている`name` フィールドに、それぞれ一意の値が含まれています。
    ```json
    {"id": "5dd6acee242760334f6aef65", "name": "User One"}
    ```
@@ -145,23 +145,20 @@ In the `UserController` section, click on `POST /users/login`, click on
 ## LoopBack4アプリケーションへのJWT認証の追加
 このセクションでは 、[JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token) ）アプローチを使用して、 どのように[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)アプリケーションに`authentication` が追加されたのかを示します。
 
-### Installing @loopback/authentication
+### @loopback/authentication のインストール
 
-The `loopback4-example-shopping` application **already** has the
-`@loopback/authentication` dependency set up in its **package.json**
+`loopback4-example-shopping` アプリケーションは **すでに** `@loopback/authentication`依存関係のセットアップを**package.json**内に持っています・
 
-It was installed as a project dependency by performing:
+以下をのコマンドで、プロジェクトの依存関係としてインストールされました。
 
 ```sh
 npm install --save @loopback/authentication
 ```
 
-### Adding the AuthenticationComponent to the Application
+### AuthenticationComponentをアプリケーションに追加する
 
-The core of authentication framework is found in the
-[AuthenticationComponent](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/authentication.component.ts),
-so it is important to add the component in the `ShoppingApplication` class in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts).
+認証フレームワークの中核は、[AuthenticationComponent](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/authentication.component.ts)にあるため、`ShoppingApplication` クラス
+[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)に、コンポーネントを追加することが重要です。
 
 ```ts
 import {AuthenticationComponent} from '@loopback/authentication';
@@ -183,25 +180,17 @@ export class ShoppingApplication extends BootMixin(
 }
 ```
 
-### Securing an Endpoint with the Authentication Decorator
+### 認証デコレータでエンドポイントを保護する
 
-Securing your application's API endpoints is done by decorating controller
-functions with the
-[Authentication Decorator](../../decorators/Decorators_authenticate.md).
+アプリケーションのAPIエンドポイントをセキュリティで保護するには、[Authentication Decorator](../../decorators/Decorators_authenticate.md)で、コントローラー関数を修飾します。
 
-The decorator's syntax is:
-
+デコレータの構文は次のとおりです。
 ```ts
 @authenticate(strategyName: string, options?: object)
 ```
 
-In the `loopback4-example-shopping` application, there is only one endpoint that
-is secured.
-
-In the `UserController` class in the
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts),
-a user can print out his/her user profile by performing a `GET` request on the
-`/users/me` endpoint which is handled by the `printCurrentUser()` function.
+ `loopback4-example-shopping` アプリケーションでは、 保護されているエンドポイントが一つだけあります。
+[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)の`UserController` では、Userは、 `printCurrentUser()` よって処理される`/users/me`エンドポイントで`GET`リクエストすることにより、 自分のUserProfileをプリントできます。
 
 ```ts
   // ...
@@ -231,71 +220,47 @@ a user can print out his/her user profile by performing a `GET` request on the
   // ...
 ```
 
-{% include note.html content="Since this controller method is obtaining SecurityBindings.USER via [method injection](../../Dependency-injection.md#method-injection) (instead of [constructor injection](../../Dependency-injection.md#constructor-injection)) and this method is decorated with the <b>@authenticate</b> decorator, there is no need to specify <b>@inject(SecurityBindings.USER, {optional:true})</b>. See [Using the Authentication Decorator](../../Loopback-component-authentication.md#using-the-authentication-decorator) for details.
+{% include note.html content="このコントローラーメソッドは（コンストラクターインジェクション [constructor injection](../../Dependency-injection.md#constructor-injection)の代わりに、メソッドインジェクション [method injection](../../Dependency-injection.md#method-injection) を介してSecurityBindings.USERを取得しており、このメソッドは<b>@authenticate</b> デコレーターで装飾されているため、<b>@inject(SecurityBindings.USER, {optional:true})</b>を指定する必要はありません。詳細については、認証デコレータの使用 [Using the Authentication Decorator](../../Loopback-component-authentication.md#using-the-authentication-decorator) を参照してください。
 " %}
 
-The `/users/me` endpoint is decorated with
+ `/users/me` は、以下のように修飾されています。
 
 ```ts
 @authenticate('jwt')
 ```
 
-and authentication will only succeed if a valid JWT token is provided in the
-`Authorization` header of the request.
+認証は有効なJWTトークンが`Authorization` リクエストのヘッダーで提供される場合にのみ、成功します 。
 
-Basically, the
-[AuthenticateFn](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-action.provider.ts)
-action in the custom sequence `MyAuthenticationSequence` (discussed in a later
-section) asks
-[AuthenticationStrategyProvider](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-strategy.provider.ts)
-to resolve the registered authentication strategy with the name `'jwt'` (which
-is `JWTAuthenticationStrategy` and discussed in a later section). Then
-`AuthenticateFn` calls `JWTAuthenticationStrategy`'s `authenticate(request)`
-function to authenticate the request.
+基本的に、カスタムシーケンス`MyAuthenticationSequence`(後述)の[AuthenticateFn](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-action.provider.ts)アクションは、`'jwt'` という名称で(これは`JWTAuthenticationStrategy` と呼ばれるものであり、後述されます)認証ストラテジを解決するために、
+[AuthenticationStrategyProvider](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-strategy.provider.ts)を依頼します。
+そして、認証をリクエストするために、`AuthenticateFn` は `JWTAuthenticationStrategy`の`authenticate(request)`をコールします。
 
-If the provided JWT token is valid, then `JWTAuthenticationStrategy`'s
-`authenticate(request)` function returns the user profile. `AuthenticateFn` then
-places the user profile on the request context using the `SecurityBindings.USER`
-binding key. The user profile is available to the `printCurrentUser()`
-controller function in a variable `currentUserProfile: UserProfile` through
-dependency injection via the same `SecurityBindings.USER` binding key. The user
-profile is returned in the response.
+提供されたJWTトークンが有効な場合、`JWTAuthenticationStrategy`の `authenticate(request)`関数は、UserProfileを返します。次に、`AuthenticateFn`は`SecurityBindings.USER` バインディングキーを使用して、リクエストコンテキストにUserProfileを配置します。
 
-If the JWT token is missing/expired/invalid, then `JWTAuthenticationStrategy`'s
-`authenticate(request)` function fails and an
-[HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)
-is thrown.
+UserProfileは、`currentUserProfile: UserProfile` 変数内で、`printCurrentUser()`コントローラファンクションに対して使用できます。
+その際、同じバインディングキー`SecurityBindings.USER`を介した、依存性注入を通じて行われます。
+すると、UserProfileが以下のような応答で返されます。
+`currentUserProfile: UserProfileSecurityBindings.USER`
 
-If an **unknown** authentication strategy **name** is specified in the
-`@authenticate` decorator:
+JWTトークンが欠落/期限切れ/無効の場合、`JWTAuthenticationStrategy`の`authenticate(request)`機能は失敗し、[HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) がスローされます。
 
+もし、`@authenticate`デコレータで **unknown** な認証ストラテジ名が指定されている場合は、
 ```ts
 @authenticate('unknown')
 ```
+となり、
+[AuthenticationStrategyProvider](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-strategy.provider.ts)の`findAuthenticationStrategy(name: string)` ファンクションは、その登録された認証ストラテジ名では見つけられないとして、 [HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)が返されます。
 
-then
-[AuthenticationStrategyProvider](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/providers/auth-strategy.provider.ts)'s
-`findAuthenticationStrategy(name: string)` function cannot find a registered
-authentication strategy by that name, and an
-[HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)
-is thrown.
+したがって、エンドポイントを`@authenticate`デコレーターで装飾するときは、正しい認証戦略名を必ず指定してください。
 
-So, be sure to specify the correct authentication strategy name when decorating
-your endpoints with the `@authenticate` decorator.
 
-### Creating a Custom Sequence and Adding the Authentication Action
+### カスタムシーケンスの作成と認証アクションの追加
 
-In a LoopBack 4 application with REST API endpoints, each request passes through
-a stateless grouping of actions called a [Sequence](../../Sequence.md).
+REST APIエンドポイントを使用するLoopBack 4アプリケーションでは、各リクエストは[Sequence](../../Sequence.md)と呼ばれるアクションのステートレスグループを通過します。
 
-Authentication is **not** part of the default sequence of actions, so you must
-create a custom sequence and add the authentication action.
+しかし、認証はデフォルトのアクションシーケンスの一部では**ない**ため、カスタムシーケンスを作成して認証アクションを追加する必要があります。
 
-The custom sequence `MyAuthenticationSequence` in
-[loopback4-example-shopping/packages/shopping/src/sequence.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/sequence.ts)
-implements the
-[SequenceHandler](https://github.com/strongloop/loopback-next/blob/master/packages/rest/src/sequence.ts)
-interface.
+[loopback4-example-shopping/packages/shopping/src/sequence.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/sequence.ts)のカスタムシーケンス`MyAuthenticationSequence` は、[SequenceHandler](https://github.com/strongloop/loopback-next/blob/master/packages/rest/src/sequence.ts)インターフェイスを実装しています。
 
 ```ts
 export class MyAuthenticationSequence implements SequenceHandler {
@@ -357,33 +322,26 @@ export class MyAuthenticationSequence implements SequenceHandler {
   }
 }
 ```
+認証アクション/機能は、
+`AuthenticationBindings.AUTH_ACTION`バインディングキーを介して注入され、
+`authenticateRequest`の名前が指定され 
+[AuthenticateFn](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/types.ts)を持ちます。
 
-The authentication action/function is injected via the
-`AuthenticationBindings.AUTH_ACTION` binding key, is given the name
-`authenticateRequest` and has the type
-[AuthenticateFn](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/types.ts).
-
-Calling
-
+コール中
 ```ts
 await this.authenticateRequest(request);
 ```
 
-before
-
+コール前
 ```ts
 // ...
 const result = await this.invoke(route, args);
 this.send(response, result);
 // ...
 ```
+コントローラのエンドポイントに到達する前に、認証が成功したことを確認します。
 
-ensures that authentication has succeeded before a controller endpoint is
-reached.
-
-To add the custom sequence `MyAuthenticationSequence` in the application, we
-must code the following in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts):
+ `MyAuthenticationSequence`アプリケーションにカスタムシーケンスを追加するには、loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)で次のコードをコーディングする必要があります。
 
 ```ts
 export class ShoppingApplication extends BootMixin(
@@ -402,15 +360,11 @@ export class ShoppingApplication extends BootMixin(
 }
 ```
 
-### Creating a Custom JWT Authentication Strategy
 
-When creating a custom authentication strategy, it is necessary to implement the
-[AuthenticationStrategy](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/types.ts)
-interface.
+### カスタムJWT認証戦略の作成
 
-A custom JWT authentication strategy `JWTAuthenticationStrategy` in
-[loopback4-example-shopping/packages/shopping/src/authentication-strategies/jwt-strategy.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/authentication-strategies/jwt-strategy.ts)
-was implemented as follows:
+カスタム認証戦略を作成する場合、[AuthenticationStrategy](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/types.ts)インターフェースを実装する必要があります。
+[loopback4-example-shopping/packages/shopping/src/authentication-strategies/jwt-strategy.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/authentication-strategies/jwt-strategy.ts)のカスタムJWT認証ストラテジ`JWTAuthenticationStrategy` iは 、次のように実装されました。
 
 ```ts
 import {inject} from '@loopback/context';
@@ -461,27 +415,17 @@ export class JWTAuthenticationStrategy implements AuthenticationStrategy {
 }
 ```
 
-It has a **name** `'jwt'`, and it implements the
-`async authenticate(request: Request): Promise<UserProfile | undefined>`
-function.
+**name**に`'jwt'` を持ち、`async authenticate(request: Request): Promise<UserProfile | undefined>` ファンクションを実装しています。
 
-An extra function `extractCredentials(request: Request): string` was added to
-extract the JWT token from the request. This authentication strategy expects
-every request to pass a valid JWT token in the `Authorization` header.
+JWTトークンを抽出するための追加機能`extractCredentials(request: Request): string` が追加されました。この認証戦略では、すべての要求が`Authorization`ヘッダーで有効なJWTトークンを渡すことを想定しています。
 
-`JWTAuthenticationStrategy` also makes use of a token service `tokenService` of
-type `TokenService` that is injected via the
-`TokenServiceBindings.TOKEN_SERVICE` binding key. It is used to verify the
-validity of the JWT token and return a user profile.
+`JWTAuthenticationStrategy` はまた、`TokenServiceBindings.TOKEN_SERVICE` バインディングキーを介して注入される `TokenService`タイプの `tokenService`を利用します。
+これは、JWTトークンの有効性を検証し、UserProfileを返すために使用されます。
+このトークンサービスについては、後のセクションで説明します。
 
-This token service is explained in a later section.
 
-### Registering the Custom JWT Authentication Strategy
-
-To register the custom authentication strategy `JWTAuthenticationStrategy` with
-the **name** `'jwt'` as a part of the authentication framework, we need to code
-the following in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts).
+### カスタムJWT認証戦略の登録
+カスタム認証戦略`JWTAuthenticationStrategy`を、 `'jwt'`**名称**で認証フレームワークの一環として登録するには、[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts).で次のようにコーディングする必要があります。
 
 ```ts
 import {registerAuthenticationStrategy} from '@loopback/authentication';
@@ -498,13 +442,9 @@ export class ShoppingApplication extends BootMixin(
 }
 ```
 
-### Creating a Token Service
+### トークンサービスの作成
 
-The token service `JWTService` in
-[loopback4-example-shopping/packages/shopping/src/services/jwt-service.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/services/jwt-service.ts)
-implements an **optional** helper
-[TokenService](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/services/token.service.ts)
-interface.
+[loopback4-example-shopping/packages/shopping/src/services/jwt-service.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/services/jwt-service.ts)のトークンサービス `JWTService` は、**オプション** のヘルパー[TokenService](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/services/token.service.ts)インターフェイスを実装します。
 
 ```ts
 import {inject} from '@loopback/context';
@@ -574,26 +514,18 @@ export class JWTService implements TokenService {
 }
 ```
 
-`JWTService` generates or verifies JWT tokens using the `sign` and `verify`
-functions of [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken).
+`JWTService` は [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)の `sign` ・`verify`ファンクションを使用して、JWT tokens を生成・検証します。
 
 It makes use of `jwtSecret` and `jwtExpiresIn` **string** values that are
 injected via the `TokenServiceBindings.TOKEN_SECRET` and the
 `TokenServiceBindings.TOKEN_EXPIRES_IN` binding keys respectively.
 
-The `async generateToken(userProfile: UserProfile): Promise<string>` function
-takes in a user profile of type
-[UserProfile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts),
-generates a JWT token of type `string` using: the **user profile** as the
-payload, **jwtSecret** and **jwtExpiresIn**.
+この `async generateToken(userProfile: UserProfile): Promise<string>` 関数は、
+[UserProfile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)型のUserProfileを 受け取り、ペイロードとしての **user profile** 、**jwtSecret**、そして **jwtExpiresIn**を使用して`string` 型のJWTトークンを生成します。
 
-The `async verifyToken(token: string): Promise<UserProfile>` function takes in a
-JWT token of type `string`, verifies the JWT token, and returns the payload of
-the token which is a user profile of type `UserProfile`.
+この `async verifyToken(token: string): Promise<UserProfile>` 関数は、`string`タイプのJWTトークンを受け取り、JWTトークンを検証し、`UserProfile`タイプのUserProfileであるトークンのペイロードを返します。
 
-To bind the JWT `secret`, `expires in` values and the `JWTService` class to
-binding keys, we need to code the following in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts):
+JWT `secret`、 `expires in` 値、および`JWTService`クラスをバインディングキーにバインドするには、[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)で次のようにコーディングする必要があります。
 
 ```ts
 export class ShoppingApplication extends BootMixin(
@@ -624,23 +556,16 @@ export class ShoppingApplication extends BootMixin(
   }
 }
 ```
+上記のコードで`TOKEN_SECRET_VALUE` は、`'myjwts3cr3t'`の値を、`TOKEN_EXPIRES_IN_VALUE`は`'600'`の値を持っています。
 
-In the code above, `TOKEN_SECRET_VALUE` has a value of `'myjwts3cr3t'` and
-`TOKEN_EXPIRES_IN_VALUE` has a value of `'600'`.
+`JWTService` は、アプリケーション内の2つの場所で使用されています：
+- `JWTAuthenticationStrategy` [loopback4-example-shopping/packages/shopping/src/authentication-strategies/jwt-strategy.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/authentication-strategies/jwt-strategy.ts)
+- `UserController` [loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)
 
-`JWTService` is used in two places within the application:
-`JWTAuthenticationStrategy` in
-[loopback4-example-shopping/packages/shopping/src/authentication-strategies/jwt-strategy.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/authentication-strategies/jwt-strategy.ts),
-and `UserController` in
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts).
+### Userサービスの作成
 
-### Creating a User Service
-
-The user service `MyUserService` in
-[loopback4-example-shopping/packages/shopping/src/services/user-service.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/services/user-service.ts)
-implements an **optional** helper
-[UserService](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/services/user.service.ts)
-interface.
+[loopback4-example-shopping/packages/shopping/src/services/user-service.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/services/user-service.ts)のUserサービス`MyUserService`は、  **追加の**ヘルパー
+[UserService](https://github.com/strongloop/loopback-next/blob/master/packages/authentication/src/services/user.service.ts)インターフェイスを実装します。
 
 ```ts
 export class MyUserService implements UserService<User, Credentials> {
@@ -684,26 +609,15 @@ export class MyUserService implements UserService<User, Credentials> {
   }
 }
 ```
+ `async verifyCredentials(credentials: Credentials): Promise<User>` 関数は[Credentials](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/repositories/user.repository.ts)型の資格情報を取り込み、[User](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/models/user.model.ts)タイプの **user**を返します。
+そして、`UserRepository`タイプの、インジェクトされたUserリポジトリを検索します。
 
-The `async verifyCredentials(credentials: Credentials): Promise<User>` function
-takes in a credentials of type
-[Credentials](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/repositories/user.repository.ts),
-and returns a **user** of type
-[User](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/models/user.model.ts).
-It searches through an injected user repository of type `UserRepository`.
+この`convertToUserProfile(user: User): UserProfile` 関数は、  `User`タイプの **user**を取り込み、[UserProfile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts)タイプのuser profileを返します 。この場合、一つのuser profileは、認証済みUserを識別する、Userプロパティの最小セットです。
 
-The `convertToUserProfile(user: User): UserProfile` function takes in a **user**
-of type `User` and returns a user profile of type
-[UserProfile](https://github.com/strongloop/loopback-next/blob/master/packages/security/src/types.ts).
-A user profile, in this case, is the minimum set of user properties which
-identify an authenticated user.
+`MyUserService`は、 `UserController`に[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)で使用されています。
 
-`MyUserService` is used in by `UserController` in
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts).
-
-To bind the `MyUserService` class, and the password hashing utility it uses, to
-binding keys, we need to code the following in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts):
+MyUserService` クラスと、それが使用するパスワードハッシュユーティリティをバインドするには、
+[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)で、下記のようにコーディングする必要があります。
 
 ```ts
 export class ShoppingApplication extends BootMixin(
@@ -733,19 +647,12 @@ export class ShoppingApplication extends BootMixin(
 }
 ```
 
-### Adding Users
+### Userを追加する
 
-In the `UserController` class in the
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts),
-users can be added by performing a `POST` request to the `/users` endpoint which
-is handled by the `create()` function.
+[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)の`UserController` クラスでは、 `create()`関数で `/users` エンドポイントに`POST`リクエストを送ることで、userを追加できます。
 
-Because user credentials like password are stored outside of the main user
-profile, we need to create a new model (a
-[Data Transfer Object](https://en.wikipedia.org/wiki/Data_transfer_object)) to
-describe data required to create a new user. The class inherits from `User`
-model to include all user profile properties, and adds a new property `password`
-allowing clients to specify the password too.
+パスワードなどのUser資格情報はメインUserProfileの外部に保存されるため、新しいモデル(
+[Data Transfer Object](https://en.wikipedia.org/wiki/Data_transfer_object))を作成して、新しいUserの作成に必要なデータを記述する必要があります。クラスは `User`モデルから継承して、すべてのuser profileプロパティを含めます。また、クライアントがパスワードも指定できるようにするために、新しいプロパティ `password`も追加します。
 
 ```ts
 @model()
@@ -757,7 +664,7 @@ export class NewUserRequest extends User {
   password: string;
 }
 ```
-
+したがって、コントローラーメソッド`UserController.create`は、`password` といった追加のプロパティをデータをリポジトリ（およびデータベース）に渡す前に、削除する必要があります。
 The controller method `UserController.create` then has to remove additional
 properties like `password` before passing the data to Repository (and database).
 
@@ -813,18 +720,14 @@ export class UserController {
   // ...
 ```
 
-A user of type
-[User](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/models/user.model.ts)
-is added to the database via the user repository if the user's email and
-password values are in an acceptable format.
+Userの電子メールとパスワードの値が許容可能な形式である場合、[User](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/models/user.model.ts)
+タイプのuserは、Userリポジトリを介してデータベースに追加されます。
 
-### Issuing a JWT Token on Successful Login
 
-In the `UserController` class in the
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts),
-a user can `log in` by performing a `POST` request, containing an `email` and
-`password`, to the `/users/login` endpoint which is handled by the `login()`
-function.
+### ログイン成功時にJWTトークンを発行する
+
+[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)の `UserController` クラスで、`login()`関数で定義された `/users/login` エンドポイントに`POST` リクエストを行うことで、Userは `log in` できます。
+ リクエストには、`email` と`password`を含んでいます。
 
 ```ts
 export class UserController {
@@ -877,27 +780,17 @@ export class UserController {
 }
 ```
 
-The user service returns a user object when the email and password are verified
-as valid; otherwise it throws an
-[HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401).
-The user service is then called to create a slimmer user profile from the user
-object. Then this user profile is used as the payload of the JWT token created
-by the token service. The token is returned in the response.
+UserServiceは、電子メールとパスワードが有効であると確認されると、Userオブジェクトを返します。そうでない場合は、[HTTP 401 UnAuthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401)をスローします。次に、UserServiceを呼び出して、Userオブジェクトから、よりスリムなUserProfileを作成します。次に、このUserProfileは、トークンサービスによって作成されたJWTトークンのペイロードとして使用されます。トークンは応答で返されます。
 
-### Specifying the Security Settings in the OpenAPI Specification
 
-In the shopping cart application, only one endpoint, `GET /users/me` is secured
-with a custom JWT authentication strategy. In order to be able to `set` and
-`use` a JWT token in the `API Explorer` (as opposed to using a REST API client),
-it is necessary to specify
-[security scheme object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#security-scheme-object)
-and
-[security requirement object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#securityRequirementObject)
-information in the application's OpenAPI specification.
+### OpenAPI仕様での、セキュリティ設定の指定
 
-In
-[loopback4-example-shopping/packages/shopping/src/utils/security-spec.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/utils/security-spec.ts)
-we defined the following:
+shopping cart アプリケーションでは、1つのエンドポイント、 `GET /users/me`のみがカスタムJWT認証戦略で保護されています。`API Explorer` のJWT tokenを、REST APIクライアントを使用する形でなく）`set`、`use` できるようにするためには、
+- [security scheme object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#security-scheme-object)と
+- [security requirement object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#securityRequirementObject)
+の情報を、アプリケーションのOpenAPI仕様に指定する必要があります。
+
+[loopback4-example-shopping/packages/shopping/src/utils/security-spec.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/utils/security-spec.ts)では、以下のように定義されています。
 
 ```ts
 import {SecuritySchemeObject, ReferenceObject} from '@loopback/openapi-v3';
@@ -915,25 +808,17 @@ export const SECURITY_SCHEME_SPEC: SecuritySchemeObjects = {
 };
 ```
 
-`SECURITY_SCHEME_SPEC` is a map of security scheme object definitions that are
-defined globally for the application. For our purposes, it only contains a
-single security scheme object that contains the
-[bearerAuth](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#jwt-bearer-sample)
-definition.
+`SECURITY_SCHEME_SPEC` は、アプリケーションに対してグローバルに定義されている、セキュリティスキームオブジェクト定義のマップです。ここでは、[bearerAuth](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#jwt-bearer-sample)定義を含む、単一のセキュリティスキームオブジェクトのみが含まれています。
 
-`OPERATION_SECURITY_SPEC` is an **operation-level**
-[security requirement object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#securityRequirementObject)
-that references the `bearerAuth` security scheme object definition. It is used
-by the `/users/me` endpoint in
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts).
+`OPERATION_SECURITY_SPEC`は、`bearerAuth` セキュリティスキームオブジェクト定義 を参照する、**operation-level**の[security requirement object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#securityRequirementObject)です。[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)の`/users/me` エンドポイントで使用されます。
 
-Notice the line
+以下の行の
 
 ```
 security: OPERATION_SECURITY_SPEC,
 ```
 
-in the code below:
+以下のコードに注意してください。
 
 ```ts
 @get('/users/me', {
@@ -960,9 +845,7 @@ async printCurrentUser(
 }
 ```
 
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)
-contributes the `security scheme object` definitions to the OpenAPI
-specification in the following manner:
+[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)は、下記のように、 `security scheme object` 定義をOpenAPIの仕様に寄与します。
 
 ```ts
 import {SECURITY_SCHEME_SPEC} from './utils/security-spec';
@@ -983,10 +866,7 @@ export class ShoppingApplication extends BootMixin(
 // ...
 ```
 
-Later, when you visit
-[http://[::1]:3000/openapi.json](http://[::1]:3000/openapi.json) while the
-application is running, search for the text `bearerAuth`. You should find these
-two occurrences:
+後に、アプリケーションの実行中に[http://[::1]:3000/openapi.json](http://[::1]:3000/openapi.json) にアクセスすると、 `bearerAuth`テキストを検索します。すると、次の2つのオカレンスが見つかります。
 
 ```
 "components": {
@@ -999,7 +879,7 @@ two occurrences:
     },
 ```
 
-and
+そして
 
 ```
 "/users/me": {
@@ -1016,26 +896,19 @@ and
         ],
 ```
 
-Later, when you visit [http://[::1]:3000/explorer/](http://[::1]:3000/explorer/)
-while the application is running, you should see an `Authorize` button at the
-top.
+です。さらにその後、アプリケーションの実行中に [http://[::1]:3000/explorer/](http://[::1]:3000/explorer/)にアクセスすると、上部に `Authorize` ボタンが表示されます。
 
 ![](../../imgs/api_explorer_authorize_button.png)
 
-as well as a **lock** icon on the `GET /users/me` endpoint in the
-`UserController` section
+さらに、`UserController` の `GET /users/me` エンドポイントに、**ロック**アイコンも現れます。
 
 ![](../../imgs/api_explorer_usercontroller_section1.png)
 
-### How to Specify A Single OpenAPI Specification Security Requirement Object For All Endpoints
+### すべてのエンドポイントに単一のOpenAPI仕様セキュリティ要件オブジェクトを指定する方法
 
-Currently, the `loopback4-example-shopping` application does not implement this,
-but there is a way to specify the same OpenAPI specification security
-requirement object to **all** endpoints of your application.
+現在の `loopback4-example-shopping`アプリケーションは未実装ではあるものの、同じOpenAPI仕様のセキュリティ要件オブジェクトを、アプリケーションのすべてのエンドポイントに指定する方法があります。
 
-The security scheme object definition is still defined in `components` section,
-but the `security` property value is set at the **top** level instead of the
-**operation** level.
+セキュリティスキームオブジェクトの定義はまだ`components`セクションで定義されていますが、`security`プロパティの値は、**operation**レベルではなく **top** レベルで 設定されます。
 
 ```
 "components": {
@@ -1055,12 +928,9 @@ but the `security` property value is set at the **top** level instead of the
   ]
 ```
 
-To accomplish this, we only need to make some minor changes to the code examples
-provided earlier.
+これを実現するには、前述のコード例に若干の変更を加えるだけです。
 
-In
-[loopback4-example-shopping/packages/shopping/src/utils/security-spec.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/utils/security-spec.ts),
-we simply rename `OPERATION_SECURITY_SPEC` to `SECURITY_SPEC`.
+[loopback4-example-shopping/packages/shopping/src/utils/security-spec.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/utils/security-spec.ts)で、 `OPERATION_SECURITY_SPEC` を `SECURITY_SPEC`にリネイムするだけです。
 
 ```ts
 import {SecuritySchemeObject, ReferenceObject} from '@loopback/openapi-v3';
@@ -1078,9 +948,7 @@ export const SECURITY_SCHEME_SPEC: SecuritySchemeObjects = {
 };
 ```
 
-In
-[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts),
-we remove the line:
+[loopback4-example-shopping/packages/shopping/src/controllers/user.controller.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/controllers/user.controller.ts)で、以下の行を削除します。
 
 ```
 security: SECURITY_SPEC_OPERATION,
@@ -1112,17 +980,14 @@ async printCurrentUser(
 }
 ```
 
-In
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts),
-we simply add the line
+[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)で、以下の行を追加します。
 
 ```
 security: SECURITY_SPEC
 ```
 
-to the call to `this.api({...})`. This basically means the security requirement
-object definition, `bearerAuth`, will be applied to all endpoints.
-
+ `this.api({...})`を呼び出すためです。これは基本的に、セキュリティ要件オブジェクト定義`bearerAuth`が、すべてのエンドポイントに適用されることを意味します。 
+ 
 ```ts
 import {SECURITY_SCHEME_SPEC, SECURITY_SPEC} from './utils/security-spec';
 
@@ -1146,33 +1011,24 @@ export class ShoppingApplication extends BootMixin(
 Visiting [http://[::1]:3000/explorer/](http://[::1]:3000/explorer/) while the
 application is running, you should still see an `Authorize` button at the top as
 before.
+アプリケーションの実行中に [http://[::1]:3000/explorer/](http://[::1]:3000/explorer/) を開くと、まだ`Authorize` ボタンがあるはずです。
 
 ![](../../imgs/api_explorer_authorize_button.png)
 
-But now, **all** the endpoints have the lock icon.
+しかし、今回は **全ての** エンドポイントにロックアイコンがあります。
 
 ![](../../imgs/api_explorer_all_sections_lock_icons1.png)
 
-This means that you can set the JWT token once via the
-`Authorize button/dialog`, and the token will be available to all the endpoints
-your interact with.
+これは、`Authorize button/dialog`を介してJWTトークンを1回設定でき、対向するすべてのエンドポイントでトークンを使用できることを意味します。
 
-There are plans to allow contributions to the OpenAPI specification via an
-extensionPoint/extensions pattern (
-[Issue #3854](https://github.com/strongloop/loopback-next/issues/3854) );
-including having authentication strategies automatically contribute security
-scheme/requirement object information (
-[Issue #3669](https://github.com/strongloop/loopback-next/issues/3669) ).
+なお、extensionPoint/extensions パターン ([Issue #3854](https://github.com/strongloop/loopback-next/issues/3854) )を介した、OpenAPI仕様への貢献を許可する計画があります。認証方式がセキュリティスキーム/要件オブジェクト情報に自動的に提供されるようにすることを含んでいます（[Issue #3669](https://github.com/strongloop/loopback-next/issues/3669) )。
 
-### Summary
 
-We've gone through the steps that were used to add JWT `authentication` to the
-`loopback4-example-shopping` application, and add
-`security scheme/requirement object` settings to its OpenAPI specification.
+### サマリ
 
-The final `ShoppingApplication` class in
-[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)
-should look like this:
+ここまで、JWT `authentication` を`loopback4-example-shopping` アプリケーションに追加し、`security scheme/requirement object`設定を、OpenAPI仕様に追加するためにの一連の手順を実行してきました。
+
+[loopback4-example-shopping/packages/shopping/src/application.ts](https://github.com/strongloop/loopback4-example-shopping/blob/master/packages/shopping/src/application.ts)の`ShoppingApplication` クラスの最終形は、以下のようになります。
 
 ```ts
 import {BootMixin} from '@loopback/boot';
@@ -1283,34 +1139,28 @@ export class ShoppingApplication extends BootMixin(
 }
 ```
 
-## Running the Completed Application
+## 完成形のアプリケーションの実行
 
-To run the completed application, follow the instructions in the
-[Try it out](#try-it-out) section.
+完成したアプリケーションを実行するには、[Try it out](#try-it-out)セクションの指示に従って ください。
+詳細については、[Authentication Component](../../Loopback-component-authentication.md)をご覧ください 。
 
-For more information, please visit
-[Authentication Component](../../Loopback-component-authentication.md).
+## バグ/フィードバック
 
-## Bugs/Feedback
+[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)でイシューをオープンしてください。こちらで確認します！
 
-Open an issue in
-[loopback4-example-shopping](https://github.com/strongloop/loopback4-example-shopping)
-and we'll take a look!
-
-## Contributions
+## 貢献する
 
 - [Guidelines](https://github.com/strongloop/loopback-next/blob/master/docs/CONTRIBUTING.md)
 - [Join the team](https://github.com/strongloop/loopback-next/issues/110)
 
-## Tests
+## テスト
 
-Run `npm test` from the root folder.
+`npm test`フォルダから実行します。
 
 ## Contributors
 
-See
-[all contributors](https://github.com/strongloop/loopback-next/graphs/contributors).
+[all contributors](https://github.com/strongloop/loopback-next/graphs/contributors)をご覧ください。
 
-## License
+## ライセンス
 
 MIT
