@@ -26,10 +26,10 @@ LoopBackは、認証、承認、ルーティングなどのAPIユースケース
 
 ![loopback-overview](./imgs/loopback-overview.png)
 
-LoopBackは長年の開発歴とリリースにより、機能-ユーザー数ともに大幅に成長しました。 LoopBackは、開発者コミュニティにも広く受け入れられています。コミュニティによる[様々な拡張機能]（https://github.com/pasindud/awesome-loopback）がその一例です。 
+LoopBackは長年の開発歴とリリースにより、機能-ユーザー数ともに大幅に成長しました。 LoopBackは、開発者コミュニティにも広く受け入れられています。コミュニティによる [様々な拡張機能](https://github.com/pasindud/awesome-loopback)がその一例です。 
 コアチームもまた、コミュニティによるフィードバックから多くのことを学びながら、相互的にLoopbackを発展させています。
 
-## Why LoopBack 4?
+## なぜLoopBack 4が生まれたのか
 
 世の中の多くのプロジェクトと同様、LoopBackにもまた次のような課題が明らかになってきています。
 
@@ -57,7 +57,7 @@ LoopBackは長年の開発歴とリリースにより、機能-ユーザー数�
 - テナント間のアーティファクトの分離を必要とする、マルチテナント
 - モデル定義とデータソースを管理/アクティブ化する、メタデータAPI
 - イベントやメッセージングなど、コネクタの新しい相互作用パターン
--モデル定義の追加のメタデータ
+- モデル定義の追加のメタデータ
 
 3.xのリリース以来、チームはLoopBackを維持し、前進させる方法についてブレーンストーミングを行ってきました。多くの課題解決を行い、既存のGitHubの問題をトリアージし、コミュニティメンバーとダウンストリーム製品に向き合い、関連するフレームワークとテクノロジーを評価して、次の質問に答えてきました。
 
@@ -79,7 +79,7 @@ LoopBackは、Node.jsアプリケーション開発者以外も、以下のよ�
 
 そこでコアチームは、上記のすべてのグループのニーズを満たすために、大胆にLoopBackを再構築することを決定しました。この決定により、新世代のAPI作成プラットフォームであるLoopBack 4が始まりました。詳細については、ブログ投稿[Loopbackを簡単に拡張できるようにするための次のステップ、Loopbackを発表](https://strongloop.com/strongblog/announcing-loopback-next)をお読みください。
 
-目的
+## 目的
 LoopBack 4の目標は次のとおりです。
 
 1. 最新かつ最高のテクノロジーの進歩に追いつく。
@@ -121,419 +121,227 @@ LoopBackは、開発者によって開発者向けに構築されていること
 
 
 ## 実装段階
-以下に示すように、LoopBack 4の最終バージョンに向かって進んでいる段階を以下に示します。
+LoopBack 4の最終バージョンへ向けて進んでいる段階を、以下に示します。
 
 1. コアのリベースとリライト
--TypeScriptを活用して、コードの品質と生産性を向上させます。
-    -JavaScriptのオプションの型システムを提供します。
-    -将来のJavaScriptエディションから現在のJavaScriptエンジンに予定されている機能を提供します。
--非同期プログラミングモデル/スタイルを統一します。
-    - 100％約束ベースのAPI。
-    - 一流の非同期プログラミングスタイルとしての非同期/待機。
-- 可視性と拡張性を高めるためにIoCコンテナーを実装する
+-TypeScriptを活用して、コードの品質と生産性を向上
+    - JavaScriptのオプションの型システムを提供
+    - 将来のJavaScriptエディションから現在のJavaScriptエンジンに予定されている機能を提供
+- 非同期プログラミングモデル/スタイルを統一
+    - 100％約束ベースのAPI
+    - 一流の非同期プログラミングスタイルとしての非同期/待機
+- 可視性と拡張性を高めるために、IoCコンテナーを実装
     - さまざまなモジュールにわたるユニバーサルレジストリ
     - 依存関係を管理するパターンとしての依存性注入
-- 拡張機能のパッケージングモデルとしてコンポーネントを導入する
-    - コンポーネントは、npmモジュールまたはローカルディレクトリにすることができます
-    - コンポーネントは拡張機能のリスト全体をカプセル化します
+- 拡張機能のパッケージングモデルとしてコンポーネントを導入
+    - コンポーネントは、npmモジュールまたはローカルディレクトリにすることが可能
+    - コンポーネントは拡張機能のリスト全体をカプセル化
 
-2. REST / HTTP呼び出しチェーンを実装して、コア設計を検証します
-- OpenAPI仕様で始まるトップダウンREST API作成を追加します。
+2. REST / HTTP呼び出しチェーンを実装して、コア設計を検証
+- OpenAPI仕様で始まるトップダウンREST API作成を追加
 - インバウンドHTTP処理のアクションのビルドシーケンス
-    - アクションの構成としてシーケンスを導入する
-    - 最も重要なアクションを実装して、REST APIのルーティングと呼び出しを実現します
-- API関連のビジネスロジックのエントリポイントとしてコントローラーを導入します。
-モデルは、現在のLoopBackアプリケーションの中心的存在です。。彼らは複数の責任を負います：
+    - アクションの構成としてシーケンスを導入
+    - 最も重要なアクションを実装して、REST APIのルーティングと呼び出しを実現
+- API関連のビジネスロジックのエントリポイントとしてコントローラーを導入
+モデルは、現在のLoopBackアプリケーションの中心的存在で、以下のような複数の役割を持っています
     - データモデリング
     - API関連のビジネスロジックのアンカー
     - 永続性またはサービス呼び出し
     - REST HTTP / JSONエンドポイントへのマッピング
 - コンポーネントとしての認証
-以下を含むコンポーネントとして認証のコア機能を実装します。
+以下を含むコンポーネントとして認証のコア機能を実装
+- 認証要件を示すデコレーター
+- 認証を処理する`authenticate`アクション
+- さまざまな認証戦略の拡張ポイント
 
-認証要件を示すデコレーター
-authenticate 認証を処理するアクション
-さまざまな認証戦略の拡張ポイント
-統合および構成機能を再構築する
+3. 統合および構成機能を再構築
+- CRUDやキー/値ストアなどのデータアクセスパターンを表すリポジトリを導入
+- レガシージャグラーとコネクタを使用して、CRUDおよびKVのリポジトリインターフェースのリファレンス実装を提供
+- ジャグラーを個別のモジュールにリファクタリング/リライト
+    - 入力システム
+    - モデルと関係の定義
+    - 検証
+    - クエリおよび突然変異言語
+    - 情報元
+    - リポジトリインターフェイスとデータアクセスの実装
+    - サービス呼び出しのサービスインターフェイスと実装
+- コネクタのインターフェイスとメタデータを定義する
+- 書き換えコネクタ
 
-CRUDやキー/値ストアなどのデータアクセスパターンを表すリポジトリを導入する
-レガシージャグラーとコネクタを使用して、CRUDおよびKVのリポジトリインターフェースのリファレンス実装を提供します。
-ジャグラーを個別のモジュールにリファクタリング/リライトします
-入力システム
-モデルと関係の定義
-検証
-クエリおよび突然変異言語
-情報元
-リポジトリインターフェイスとデータアクセスの実装
-サービス呼び出しのサービスインターフェイスと実装
-コネクタのインターフェイスとメタデータを定義する
-書き換えコネクタ
-宣言的なメタデータとブートストラップ
+4. 宣言的なメタデータとブートストラップ
+LoopBackは、モデル、関係、データソース、コネクター、ACL、コントローラー、リポジトリー、アクション、シーケンス、コンポーネント、ユーティリティー関数、OpenAPI仕様などの一連の成果物を管理します。これらのアーティファクトをコード（apiおよびデコレータ）で記述するプログラム的なアプローチに加えて、JSON / YAMLファイルで宣言できるように、宣言的なサポートを追加したいと思います。
 
-LoopBackは、モデル、関係、データソース、コネクター、ACL、コントローラー、リポジトリー、アクション、シーケンス、コンポーネント、ユーティリティー関数、OpenAPI仕様などの一連の成果物を管理します。これらのアーティファクトをコード（apiおよびデコレータ）で記述するプログラム的なアプローチに加えて、JSON / YAMLファイルで宣言できるように宣言的なサポートを追加したいと思います。
+- JSON / YAML形式の新しいドメイン固有言語（DSL）と対応するテンプレートを定義
+- プロジェクトレイアウトを定義して、プロジェクトの成果物を整理
+- IoCコンテキストを活用して、拡張ポイント/拡張パターンに従ってそのようなアーティファクトのメタデータ/インスタンスを管理
+- 各タイプの成果物のライフサイクルおよびシリアル化/逆シリアル化の要件を定義
+- ブートコンポーネントを追加して、アーティファクトを検出/ロード/解決/アクティブ化します。ブートプロセスは、ツールとランタイムの両方に合わせて調整が可能
 
-JSON / YAML形式の新しいドメイン固有言語（DSL）と対応するテンプレートを定義します。
-プロジェクトレイアウトを定義して、プロジェクトの成果物を整理します。
-IoCコンテキストを活用して、拡張ポイント/拡張パターンに従ってそのようなアーティファクトのメタデータ/インスタンスを管理します。
-各タイプの成果物のライフサイクルおよびシリアル化/逆シリアル化の要件を定義します。
-ブートコンポーネントを追加して、アーティファクトを検出/ロード/解決/アクティブ化します。ブートプロセスは、ツールとランタイムの両方に合わせて調整できます。
-ツーリング（CLIおよびUI）
+5. ツーリング（CLIおよびUI）
+- CLIおよびUIツールを以下に追加します。
+    - Scaffold LoopBack 4アプリケーション
+    - シーケンス、アクション、コントローラー、リポジトリ、サービス、データソース、モデルなどの成果物を管理
 
-CLIおよびUIツールを以下に追加します。
-Scaffold LoopBack 4アプリケーション
-シーケンス、アクション、コントローラー、リポジトリ、サービス、データソース、モデルなどの成果物を管理します
-クラウドネイティブエクスペリエンスを有効にする
-
-コントローラがgRPCサービスとして公開されることを許可する
-他のgRPCサービスとの相互作用を許可する
-DockerやKubernetesなどのマイクロサービス展開インフラストラクチャとの統合
-サービスメッシュとの統合
-次の図は、LoopBack 4の高レベルの構成要素を示しています。
-
-
-
-The core team decided to make a bold move and rebuild LoopBack to meet the needs
-of all the above groups. The decision led to the inception of LoopBack 4, a new
-generation of API creation platform. For more information, read the blog post
-[Announcing LoopBack.next, the Next Step to Make LoopBack Effortlessly Extensible](https://strongloop.com/strongblog/announcing-loopback-next).
-
-## Objectives
-
-LoopBack 4's goals are:
-
-1.  Catch up with latest and greatest technology advances.
-
-    - Adopt [ES2016/2017](http://exploringjs.com/es2016-es2017/index.html) and
-      [TypeScript](https://www.typescriptlang.org/) for ease of maintenance and
-      productivity.
-    - Embrace new standards such as [OpenAPI Spec](https://www.openapis.org/)
-      and [GraphQL](http://graphql.org/).
-
-2.  Promote extensibility to grow the ecosystem.
-
-    - Build a minimal core and enable everything else to be implemented via
-      extensions.
-    - Open the door for more
-      [extension points and extensions](https://github.com/strongloop/loopback-next/issues/512).
-
-3.  Align with cloud native experience for microservices.
-
-    - Adopt cloud native microservices by adopting initiatives such as
-      [Cloud Native Computing Foundation](https://www.cncf.io/).
-    - Make LoopBack a first-class citizen of the microservices ecosystem.
-
-4.  Remove the complexity and inconsistency across modules.
-
-    - Use a consistent registry and APIs to manage artifacts and their
-      dependencies.
-    - Pay down technical debts by refactoring complex modules.
-
-5.  Separate concerns for better composability.
-    - Introduce new concepts such as controllers and repositories to represent
-      different responsibilities.
-    - Break down the runtime as a set of services and utilize the extension
-      points/extensions pattern to manage the registration, resolution, and
-      composition.
-
-
-## Implementation stages
-
-Here are the stages we are marching through toward the final version of LoopBack
-4 as illustrated below.
-
-1.  **Rebase and rewrite the core**
-
-    - Leverage TypeScript for better code quality and productivity.
-
-      - Provide optional type system for JavaScript.
-      - Provide planned features from future JavaScript editions to current
-        JavaScript engines.
-
-    - Unify the asynchronous programming model/style.
-
-      - 100% promise-based APIs.
-      - Async/Await as first-class async programming style.
-
-    - Implement an IoC Container for better visibility and extensibility
-
-      - Universal registry across different modules
-      - Dependency injection as a pattern to manage dependencies
-
-    - Introduce Component as packaging model for extensions
-      - Component can be a npm module or a local directory
-      - Component encapsulates a list of extensions as a whole
-
-2.  **Validate the core design by implementing an REST/HTTP invocation chain**
-
-    - Add top-down REST API creation which starts with OpenAPI specs.
-
-    - Build sequence of actions for inbound http processing
-
-      - Introduce sequence as the composition of actions
-      - Implement the most critical actions to fulfill the REST API routing and
-        invocation
-
-    - Introduce controllers as entry points for API-related business logic.
-
-      Models are the centerpieces of the current LoopBack applications. . They
-      take multiple responsibilities:
-
-      - Data modeling
-      - Anchor for API related business logic
-      - Persistence or service invocation
-      - Mapping to REST HTTP/JSON endpoints
-
-    - Authentication as a component
-
-      Implement the core functionality of authentication as a component, which
-      includes:
-
-      - Decorators to denote authentication requirement
-      - `authenticate` action to handle authentication
-      - Extension points for various authentication strategies
-
-3.  **Rebuild our integration and composition capabilities**
-
-    - Introduce repositories to represent data access patterns such as CRUD or
-      Key/Value stores
-    - Provide a reference implementation of CRUD and KV flavors of repository
-      interfaces using the legacy juggler and connectors
-    - Refactor/rewrite the juggler into separate modules
-      - Typing system
-      - Model and relation definition
-      - Validation
-      - Query and mutation language
-      - DataSource
-      - Repository interfaces and implementations for data access
-      - Service interfaces and implementations for service invocations
-    - Define interfaces and metadata for connectors
-    - Rewrite connectors
-
-4.  **Declarative metadata and bootstrapping**
-
-    LoopBack manages a set of artifacts, such as models, relations, datasources,
-    connectors, ACLs, controllers, repositories, actions, sequences, components,
-    utility functions, and OpenAPI specs. In addition to the programmatic
-    approach to describe these artifacts by code (apis and decorators), we would
-    like to add declarative support so that they can be declared in JSON/YAML
-    files.
-
-    - Define a new domain-specific language (DSL) in JSON/YAML format and
-      corresponding templates.
-    - Define the project layout to organize project artifacts.
-    - Leverage the IoC Context to manage metadata/instances of such artifacts
-      following the extension point/extension pattern.
-    - Define the lifecycle and serialization/de-serialization requirements for
-      each type of artifact.
-    - Add a boot component to discover/load/resolve/activate the artifacts. The
-      boot process can be tailored for both tooling and runtime.
-
-5.  **Tooling (CLI & UI)**
-
-    - Add CLI and UI tools to:
-      - Scaffold LoopBack 4 applications
-      - Manage artifacts such as sequences, actions, controllers, repositories,
-        services, datasources and models
-
-6.  **Enable cloud native experience**
-
-    - Allow controllers to be exposed as gRPC services
-    - Allow interaction with other gRPC services
-    - Integration with microservices deployment infrastructure such as Docker
-      and Kubernetes
-    - Integration with service mesh
-
-The following diagram illustrates the high-level building blocks of LoopBack 4:
+6. クラウドネイティブエクスペリエンスを有効化
+    - コントローラがgRPCサービスとして公開されることを許可
+    - 他のgRPCサービスとの相互作用を許可
+    - DockerやKubernetesなどのマイクロサービス展開インフラストラクチャとの統合
+    - サービスメッシュとの統合
+    
+次の図は、LoopBack 4の構成要素をハイレベルに示しています。
 
 ![loopback-stack](./imgs/loopback-stack.png)
 
-Please note there is a common layer below the different functional areas in the
-stack. Let's examine the need to build a new core foundation for LoopBack 4.
+スタック内の各機能領域の下に、共通のレイヤーがあることに注意してください。それでは、LoopBack 4の新しいコア基盤を構築する必要性を調べてみましょう。
 
-## A new core foundation
+# 新しいコア基盤
 
-### The core responsibility
-
-LoopBack itself is already modular. For example, a typical LoopBack 3.x
-application's dependency graph will have the following npm modules:
+## 中心的な役割
+LoopBack自体はすでにモジュール化されています。たとえば、典型的なLoopBack 3.xアプリケーションの依存関係グラフには、次のnpmモジュールがあります。
 
 - loopback
 - strong-remoting
 - loopback-datasource-juggler
-- loopback-connector-\*
+- loopback-connector- *
 - loopback-component-explorer
 
-LoopBack manages various artifacts across different modules. The following are a
-list of built-in types of artifacts that LoopBack 3.x supports out of box:
+LoopBackは、さまざまなモジュールにわたってさまざまなアーティファクトを管理します。以下は、LoopBack 3.xがすぐにサポートする組み込みタイプの成果物のリストです。
 
-- Model definitions/relations: describes data models and their relations
-- Validation: validates model instances and properties
-- Model configurations: configures models and attaches them to data sources
-- Datasources: configures connectivity to backend systems
-- Connectors: implements interactions with the underlying backend system
-- Components: wraps a module that be bootstrapped with LoopBack
-- Remoting: maps JavaScript methods to REST API operations
-- ACLs: controls access to protected resources
-- Built-in models: provides set of prebuilt models such as User, AccessToken,
-  and Role
-- Hooks/interceptors
-  - Express middleware
-  - remote hooks
-  - CRUD operation hooks
-  - connector hooks
-- Security integration
-  - Identity and token management
-  - Authentication schemes
-    - Passport component for various authentication strategies
-- Storage component for various local/cloud object storage systems
-  - Local file system
-  - Amazon S3
-  - Rackspace
-  - Azure
-  - Google Cloud
-  - OpenStack
-  - IBM Cloud Object Storage
-- Push component for mobile push notifications
-  - iOS
-  - Android
-- Different API styles
-  - REST
-  - gRPC
-  - GraphQL
+- モデルの定義/関係：データモデルとその関係についてを記述
+- バリデーション：モデルのインスタンスとプロパティを検証
+- モデル構成：モデルを構成し、データソースに接続
+- データソース：バックエンドシステムへの接続を構成
+- コネクタ：基盤となるバックエンドシステムとの相互作用を実装
+- コンポーネント：LoopBackでブートストラップされるモジュールを包括
+- リモート処理：JavaScriptメソッドをREST API操作にマッピング
+- ACLs：保護されたリソースへのアクセスを制御
+- 組み込みモデル：User、AccessToken、Roleなどの事前構築モデルのセットを提供
+- フック/インターセプター
+- Expressミドルウェア
+    - リモートフック
+    - CRUD操作フック
+    - コネクタフック
+- セキュリティ統合
+    - IDおよびトークン管理
+    - 認証スキーム
+    - さまざまな認証戦略のためのパスポートコンポーネント
+- さまざまなローカル/クラウドオブジェクトストレージシステムのストレージコンポーネント
+    - ローカルファイルシステム
+    - Amazon S3
+    - Rackspace
+    - Azure
+    - Google Cloud
+    - OpenStack
+    - IBMクラウドオブジェクトストレージ
+- モバイルプッシュ通知用のプッシュコンポーネント
+    - iOS
+    - Android
+- さまざまなAPIスタイル
+    - REST
+    - gRPC
+    - GraphQL
+    
+これらのアーティファクトのメタデータは、LoopBackのナレッジベースを形成して、すべての要素を結合し、一般的なAPIユースケースを処理する機能を構築します。
 
-Metadata for these artifacts form the knowledge base for LoopBack to glue all
-the pieces together and build capabilities to handle common API use cases.
+メタデータとそれらの関係を表現する方法は、LoopBackコア基盤の重要な役割です。このような構成要素を提供・使用されるための一貫した方法を提供する必要があります。
 
-How to represent the metadata and their relations is the key responsibility of
-the LoopBack core foundation. It needs to provide a consistent way to contribute
-and consume such building blocks.
+##コアの主要成分
+LoopBack 4の中核となる基盤は、さまざまなアーティファクトを、各性質とは別々に管理する役割があります。
 
-### Key ingredients for the core
+- すべてのアーティファクトの可視性とアドレス可能性を提供する、一貫したレジストリ
+    - 可視性：各アーティファクトには一意のアドレスがあり、URIまたはキーを介してアクセスできます。アーティファクトは、さまざまなスコープで表示することもできます。
+    - 拡張性：LoopBackの成果物はタイプごとに管理できます。新しい成果物タイプを導入できます。特定のタイプのインスタンスを追加、削除、または置換できます。拡張ポイント/拡張機能の階層でアーティファクトを整理すると、プロバイダーとコンシューマーが分離されます。 
+- 依存関係を解決して作成する機能
+    - 構成可能性：1つのアーティファクトが他のアーティファクトに依存することはよくあります。依存性注入またはサービスロケーターパターンにより、コアは複数のアーティファクトがどのように連携するかを、大幅に簡素化します。
+- 拡張機能のパッケージングモデル
+    - プラグ可能性：拡張機能は、全体として編成および提供できます。拡張機能の開発者が独自のモジュールをバンドルとして作成し、LoopBackアプリケーションにプラグインできるように、パッケージングモデルが必要です。
 
-The core foundation for LoopBack 4 is responsible for managing various artifacts
-independent of the nature of such artifacts.
 
-- A consistent registry to provide visibility and addressability for all
-  artifacts.
+###  Expressがバックにある理由
 
-  - Visibility: Each artifact has a unique address and can be accessed via a URI
-    or key. Artifacts can also be visible at different scopes.
+#### 背景
 
-  - Extensibility: LoopBack artifacts can be managed by types. New artifact
-    types can be introduced. Instances for a given type can be added, removed,
-    or replaced. Organizing artifacts in a hierarchy of extension
-    points/extensions decouples providers and consumers.
+私たちは、Expressのエコシステムの幅広いコミュニティやミドルウェアを活用することができるように、ループバックを常にExpressの上に構築していました。**しかし**、それによりループバックにはいくつかの課題が残りました。LoopBack 4では、Expressからの移行（そしてExpressなしでフレームワークの構築までも）を検討しましたが、その広大なエコシステムのため、最終的にはExpressに戻りました。
 
-- Ability to compose with dependency resolution.
+Expressが提供するものとLoopBackのニーズとのギャップは例えばこのようなものがあります。
 
-  - Composability: It's common that one artifact to have dependencies on other
-    artifacts. With dependency injection or service locator patterns, the core
-    will greatly simplify how multiple artifacts work together.
+- 拡張性の欠如
+  >Expressはミドルウェア経由でのみ拡張可能です。レジストリを公開せず、ミドルウェアやルーターなどのアーティファクトを管理するためのAPIも提供しません。
+- 構成可能性の欠如
+  >Expressはコンポーザブルではありません。例えば、`app.use()`は、ミドルウェアを登録する唯一の方法ですが、ミドルウェアの順序は、 `app.use`の順序によって決まります。 
+- 宣言的なサポートの欠如
+  > Expressでは、すべてがJavaScriptによって行われます。対照的に、LoopBackは、ベストプラクティスとしての規則とパターンによるAPIの作成と構成を容易にするように設計されています。
 
-- A packaging model for extensions.
+#### ひねりを加え、Expressに戻る
 
-  - Pluggability: Extensions can be organized and contributed as a whole. We
-    need to have a packaging model so that extension developers can create their
-    own modules as bundles and plug into a LoopBack application.
+LoopBackの主な目的は、CORSのミドルウェアや静的ファイルサービスなどではなく、データベース、サービスなどとやり取りするAPIの作成を簡単にすることです。LoopBack4の新しいミドルウェアを作成して、「車輪を再発明」は避けたいところでした。
 
-### Why Express behind the scene?
+そこでチームは、[Express or Koa](https://github.com/strongloop/loopback-next/pull/1082) の活用を検討しました （ただし、ミドルウェアのサポートのみ）。最終的な決定は、上記で特定したギャップを次のように解決し、埋める方法でExpressを使用することでした。
 
-#### Background
+- LoopBackは、 [独自のコントローラー/ OpenAPIメタデータ最適化ルーティングエンジン](Routes.md)を提供
+- Expressは、Expressミドルウェア（CORS、静的ファイルサービス）を使用可能にするためにのみ、適用
+- LoopBackは、[アクションのシーケンス](Sequence.md)を使用して、コンポーザブルな方法でレスポンスを作成し、`@loopback/context`をレジストリとして活用します。
+詳細については、[インバウンドHTTP処理の改善](https://strongloop.com/strongblog/loopback4-improves-inbound-http-processing)に関するブログ投稿をご覧ください 。
 
-LoopBack had always been built on Express so we can leverage the vast community
-and middleware in the Express ecosystem **BUT** it presented some challenges for
-LoopBack. With LoopBack 4 we considered moving away from Express (and even built
-the framework without Express) but eventually circled back to Express because of
-its vast ecosystem.
+##LoopBack 4の拡張性の詳細
 
-Some of the gaps between what Express offers and LoopBack's needs are:
+LoopBack 4の拡張性を実現するには、いくつかの重要な柱があります。
 
-- Lack of extensibility
-  > Express is only extensibile via middleware. It neither exposes a registry
-  > nor provides APIs to manage artifacts such as middleware or routers.
-- Lack of composability
-  > Express is not composable. For example, `app.use()` is the only way to
-  > register a middleware. The order of middleware is determined by the order of
-  > `app.use`.
-- Lack of declarative support
-  > In Express, everything is done by JavaScript ... In contrast, LoopBack is
-  > designed to facilitate API creation and composition by conventions and
-  > patterns as best practices.
+Context、サービスを管理するIoCコンテナー
+構成を容易にする依存性注入
+注釈を使用してメタデータを提供するデコレーター
+拡張機能をバンドルするパッケージングモデルとしてのコンポーネント
+Extending LoopBack 4をご覧ください
 
-#### Circling back to Express with a twist
+- [Context](Context.md) : サービスを管理するIoCコンテナー
+- [Dependency injection](Dependency-injection.md) : 構成を容易にする
+- [Decorators](Decorators.md) : 注釈を使用してメタデータを提供する
+- [Component](Using-components.md) : 拡張機能をバンドルするパッケージングモデルとしての機能
 
-The main purpose of LoopBack is to make API creation easy, interacting with
-databases, services, etc., not middleware for CORS, static file serving, etc. We
-didn't want to reinvent the wheel by writing new middleware for LoopBack 4.
+詳しくは、 [Extending LoopBack 4](Extending-LoopBack-4.md)をご覧ください。
 
-The team explored leveraging
-[Express or Koa](https://github.com/strongloop/loopback-next/pull/1082) (but
-only for their middleware support). The final decision was to use Express in a
-way that bridges the gap by addressing the gaps identified above as follows:
+## 新しいコアの上にLoopBackエクスペリエンスを再構築する
+拡張可能な基盤が整ったら、次のアーティファクトで "Eat your own dog food" (自分のシステムを試してみる)ことにより、LoopBack REST APIエクスペリエンスの再構築を開始します。
 
-- LoopBack provides its own
-  [Controller / OpenAPI metadata optimized routing engine](Routes.md)
-- Express is used exclusively for allowing us to consume Express middleware
-  (CORS, Static File Serving)
-- LoopBack uses a [Sequence of Actions](Sequence.md) to craft the response in a
-  composable manner and leverages `@loopback/context` as a registry.
+- シーケンスとアクション：HTTPリクエスト/レスポンスを処理するアクションのシーケンス。
+- コントローラー：RESTエンドポイントの背後でAPI操作を実装するメソッドを持つクラス。
+- モデル：データモデルの定義。
+- リポジトリ：データソースのアクセスパターンのインターフェイス。
+機能は次のモジュールによって提供されます。
+- @ loopback / rest
+- @ loopback / repository
 
-You can learn more details in our blog post on
-[improving inbound http processing](https://strongloop.com/strongblog/loopback4-improves-inbound-http-processing).
-
-## Deep dive into LoopBack 4 extensibility
-
-There are several key pillars to make extensibility a reality for LoopBack 4.
-
-- [Context](Context.md), the IoC container to manage services
-- [Dependency injection](Dependency-injection.md) to facilitate composition
-- [Decorators](Decorators.md) to supply metadata using annotations
-- [Component](Using-components.md) as the packaging model to bundle extensions
-
-Please check out [Extending LoopBack 4](Extending-LoopBack-4.md).
-
-## Rebuilding LoopBack experience on top of the new core
-
-With the extensible foundation in place, we start to rebuild the LoopBack REST
-API experience by "eating your own dog food" with the following artifacts:
-
-- [Sequence and actions](Sequence.md): A sequence of actions to handle HTTP
-  requests/responses.
-- [Controllers](Controllers.md): A class with methods to implement API
+- [シーケンスとアクション](Sequence.md): HTTPリクエスト/レスポンスを処理するアクションのシーケンス
+- [コントローラー](Controllers.md): RESTエンドポイントのバックで、API操作を実装するメソッドを持つクラス
   operations behind REST endpoints.
-- [Model](Model.md): Definition of data models.
-- [Repositories](Repositories.md): Interfaces of access patterns for data
-  sources.
+- [Model](Model.md): データモデルの定義
+- [Repositories](Repositories.md):データソースのアクセスパターンのインターフェイス
 
-The features are provided by the following modules:
+各機能は次のモジュールによって提供されています。
 
 - [@loopback/rest](https://github.com/strongloop/loopback-next/tree/master/packages/rest/)
 - [@loopback/repository](https://github.com/strongloop/loopback-next/tree/master/packages/repository/)
 
-## Example for application developers
 
-Before we go further, let's try to build a 'hello world' application with
-LoopBack 4.
+##アプリケーション開発者向けの例
+先に進む前に、LoopBack 4で「hello world」アプリケーションを構築してみましょう。
 
-### Basic Hello-World
-
+###基本的なHello-World
 [@loopback/example-hello-world](https://github.com/strongloop/loopback-next/tree/master/examples/hello-world)
 
-### Intermediate example
-
+###中級の例
 [@loopback/example-todo](https://github.com/strongloop/loopback-next/tree/master/examples/todo)
 
-## Example for extension developers
 
-### Learn from existing ones
-
+##拡張機能の開発者向けの例
+##既存のものから学ぶ
 - [@loopback/example-log-extension](https://github.com/strongloop/loopback-next/tree/master/examples/log-extension)
 - [@loopback/authentication](https://github.com/strongloop/loopback-next/tree/master/packages/authentication)
 
-## References
-
+##参照資料
 - <https://strongloop.com/strongblog/announcing-loopback-next/>
 - <https://www.infoq.com/articles/driving-architectural-simplicity>
 - <https://strongloop.com/strongblog/creating-a-multi-tenant-connector-microservice-using-loopback/>
 - <https://strongloop.com/strongblog/loopback-as-an-event-publisher/>
 - <https://strongloop.com/strongblog/loopback-as-a-service-using-openwhisk/>
+
