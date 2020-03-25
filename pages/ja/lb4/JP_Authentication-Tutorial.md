@@ -887,7 +887,7 @@ export class ShoppingApplication extends BootMixin(
 です。さらにその後、アプリケーションの実行中に [http://[::1]:3000/explorer/](http://[::1]:3000/explorer/)にアクセスすると、上部に `Authorize` ボタンが表示されます。
 
 ![](../../imgs/api_explorer_authorize_button.png)
-
+/Users/saotakahashi/Documents/github/v1h-admin-web-datadownload
 さらに、`UserController` の `GET /users/me` エンドポイントに、**ロック**アイコンも現れます。
 
 ![](../../imgs/api_explorer_usercontroller_section1.png)
