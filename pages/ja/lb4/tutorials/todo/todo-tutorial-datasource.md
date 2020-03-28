@@ -1,36 +1,24 @@
 ---
-lang: en
-title: 'Add a Datasource'
+lang: jp
+title: 'データソースを追加する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-datasource.html
+permalink: /doc/jp/lb4/todo-tutorial-datasource.html
 summary: LoopBack 4 Todo Application Tutorial - Add a Datasource
 ---
 
-### Datasources
+### データソース
 
-Datasources are LoopBack's way of connecting to various sources of data, such as
-databases, APIs, message queues and more. A `DataSource` in LoopBack 4 is a
-named configuration for a Connector instance that represents data in an external
-system. The Connector is used by `legacy-juggler-bridge` to power LoopBack 4
-Repositories for Data operations.
+データソースは、データベース、API、メッセージキューなど、さまざまなデータソースに接続するLoopBackの方法です。Loopback 4の`DataSource`には、外部システム内のデータを表すコネクタインスタンスの名前を付けた構成です。コネクターは、データ操作のためにLoopBack 4リポジトリーを強化するために`legacy-juggler-bridge`によって使用されます。
 
-In LoopBack 4, datasources can be represented as strongly-typed objects and
-freely made available for [injection](../../Dependency-injection.md) throughout
-the application. Typically, in LoopBack 4, datasources are used in conjunction
-with [Repositories](../../Repositories.md) to provide access to data.
+LoopBack 4ではデータソースを、強く型付けされたオブジェクトとして表すことができ、またアプリケーション全体で自由に [injection](../../Dependency-injection.md)に適用できるようになります。通常、LoopBack 4では、データソースを [Repositories](../../Repositories.md)と組み合わせて使用​​して、データへのアクセスを提供します。
 
-For more information about datasources in LoopBack, see
-[DataSources](../../DataSources.md).
+LoopBackのデータソースの詳細については、[DataSources](../../DataSources.md)を参照してください。
+また、APIはTodoアイテムのインスタンスを永続化する必要があるため、これを可能にするためにデータソース定義を作成する必要があります。
 
-Since our Todo API will need to persist instances of Todo items, we'll need to
-create a datasource definition to make this possible.
+### データソースの構築
 
-### Building a Datasource
-
-From inside the project folder, we'll run the `lb4 datasource` command to create
-a DataSource. For the purposes of this tutorial, we'll be using the memory
-connector provided with the Juggler.
+プロジェクトフォルダー内から、`lb4 datasource`コマンドを実行してDataSourceを作成します。このチュートリアルでは、Jugglerに付属のメモリコネクタを使用します。
 
 ```sh
 lb4 datasource
@@ -46,11 +34,9 @@ lb4 datasource
 Datasource Db was created in src/datasources/
 ```
 
-To view the completed files, see the
-[`Todo` example](https://github.com/strongloop/loopback-next/tree/master/examples/todo/src/datasources).
-
-Create a `data` folder in the applications root and add a new file called
-`db.json` containing an example database.
+完成したファイルを表示するには、[`Todo` example](https://github.com/strongloop/loopback-next/tree/master/examples/todo/src/datasources).
+を参照してください 。
+アプリケーションルート内に `data`フォルダを作成し、サンプルデータを置いた`db.json` を作成し、格納します。
 
 {% include code-caption.html content="data/db.json" %}
 
@@ -70,16 +56,13 @@ Create a `data` folder in the applications root and add a new file called
 }
 ```
 
-{% include note.html content="If you are using a relational database as the
-datasource, don't forget to create the corresponding table or follow the
-[Database migration instructions](https://loopback.io/doc/en/lb4/Database-migrations.html) to get it created programmatically.
+{% include note.html content=" 既にデータソースとしてリレーショナルデータベースを使用している場合は、対応するテーブルを作成するか、[データベースの以降手順](https://loopback.io/doc/en/lb4/Database-migrations.html) に従ってプログラムで作成することにご注意ください 。
 " %}
 
-Once you're ready, we'll move onto adding a
-[repository](todo-tutorial-repository.md) for the datasource.
+準備ができたら、データソースに[レポジトリ](todo-tutorial-repository.md) を追加します。
 
 ### Navigation
 
-Previous step: [Add your Todo model](todo-tutorial-model.md)
+前のステップ: [Add your Todo model](todo-tutorial-model.md)
 
-Next step: [Add a repository](todo-tutorial-repository.md)
+次のステップ: [Add a repository](todo-tutorial-repository.md)

@@ -1,49 +1,41 @@
 ---
-lang: en
-title: 'Add the Todo Model'
+lang: jp
+title: 'Todo Modelを追加する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-model.html
+permalink: /doc/jp/lb4/todo-tutorial-model.html
 summary: LoopBack 4 Todo Application Tutorial - Add the Todo Model
 ---
 
-### Models
+### モデル
 
-Now we can begin working on the representation of our data for use with
-LoopBack 4. To that end, we're going to create a Todo model that can represent
-instances of a task for our Todo list. The Todo model will serve both as a
-[Data Transfer Object](https://en.wikipedia.org/wiki/Data_transfer_object) (also
-known as a DTO) for representing incoming Todo instances on requests, as well as
-our data structure for use with loopback-datasource-juggler.
+ここから、LoopBack 4で使用するデータの表現に取り掛かります。そのために、Todoリストのタスクのインスタンスを表すための、Todoモデルを作成します。Todoモデルは 、リクエストの着信Todoインスタンスを表すための[データ転送オブジェクト](https://en.wikipedia.org/wiki/Data_transfer_object)（DTOとも呼ばれます）と、loopback-datasource-jugglerで使用するためのデータ構造の、両方として機能します。
 
-A model describes business domain objects and defines a list of properties with
-name, type, and other constraints.
+モデルはビジネスドメインオブジェクトを記述し、名前、タイプ、およびその他の制約を持つプロパティのリストを定義します。
 
-Models are used for data exchange on the wire or between different systems.
+また、モデルは、ネットワーク上または異なるシステム間のデータ交換に使用されます。
 
-For more information about Models and how they are used in LoopBack, see
-[Models](../../Model.md).
+モデルの詳細と、LoopBackでのモデルの使用方法については、[モデル](../../Model.md)を参照してください 。
 
-{% include note.html content="LoopBack 3 treated models as the 'center' of operations; in LoopBack 4, that is no longer the case. While LoopBack 4 provides many of the helper methods and decorators that allow you to utilize models in a similar way, you are no longer _required_ to do so!
+{% include note.html content="LoopBack 3では、モデルを操作の「中心」として扱っていましたが、LoopBack　4では異なります。LoopBack 4は、同じ方法でモデルを利用できるようにするヘルパーメソッドとデコレーターの多くを提供しますが、必ずしも必須ではなくなりました。
+
+
+LoopBack 3 treated models as the 'center' of operations; in LoopBack 4, that is no longer the case. While LoopBack 4 provides many of the helper methods and decorators that allow you to utilize models in a similar way, you are no longer _required_ to do so!
 " %}
 
-### Building your Todo model
+### Todo モデルの作成
 
-A todo list is all about tracking tasks. For this to be useful, it will need to
-let you label tasks so that you can distinguish between them, add extra
-information to describe those tasks, and finally, provide a way of tracking
-whether or not they're complete.
+todo リストは、タスクの追跡に関するものです。これを有効にするには、タスクを区別できるようにタスクにラベルを付け、それらのタスクを説明する追加情報を追加し、最後に、タスクが完了したかどうかを追跡する方法を提供できるようにする必要があります。
 
-The to-do model has the following properties:
+to-do モデルには次のプロパティがあります。
 
-- `id`: a unique id
-- `title`: a title
-- `desc`: a description that details the specific task to be accomplished
-- `isComplete`: a boolean flag for whether or not we’ve completed the task
+- `id`: ユニークなid
+- `title`: タイトル
+- `desc`: 実行するタスクの詳細説明
+- `isComplete`:タスクが完了したかどうかを示すブールフラグ
 
-We can use the `lb4 model` command and answer the prompts to generate the model
-for us. Press `return` with an empty property name to generate the model. Follow
-these steps:
+`lb4 model` コマンドを使用してプロンプトに答えることで、モデルを生成できます。空のプロパティ名を指定して`return` で、モデルを生成します。
+次の手順を実行します：
 
 ```sh
 lb4 model
@@ -97,15 +89,12 @@ Enter an empty property name when done
 Model Todo was created in src/models/
 ```
 
-To view the completed file, see the
-[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/models/todo.model.ts).
+完成したファイルを表示するには、[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/models/todo.model.ts)を参照してください。
+これでモデルができました！次は
+[データソース](todo-tutorial-datasource.md) を追加して実際のCRUD操作を実行できるようにしましょう。
 
-Now that we have our model, it's time to add a
-[datasource](todo-tutorial-datasource.md) so we can perform real CRUD
-operations!
+### ナビゲーション
 
-### Navigation
+前のステップ: [アプリの土台を作成する](todo-tutorial-scaffolding.md)
 
-Previous step: [Create your app scaffolding](todo-tutorial-scaffolding.md)
-
-Next step: [Add a datasource](todo-tutorial-datasource.md)
+次のステップ: [データソースを追加する](todo-tutorial-datasource.md)

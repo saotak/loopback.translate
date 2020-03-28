@@ -1,9 +1,9 @@
 ---
-lang: en
+lang: jp
 title: 'Create your app scaffolding'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-scaffolding.html
+permalink: /doc/jp/lb4/todo-tutorial-scaffolding.html
 summary: LoopBack 4 Todo Application Tutorial - Create app scaffolding
 ---
 
