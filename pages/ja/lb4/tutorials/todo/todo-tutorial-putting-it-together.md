@@ -32,9 +32,9 @@ $ npm start
 Server is running at http://127.0.0.1:3000
 ```
 
-次に、[API Explorer](http://localhost:3000/explorer) でAPIを確認し、リクエストを行えます。
+次に、[API Explorer](http://localhost:3000/explorer) でAPIを確認しましょう。リクエストを行うことができます。
 
-ここでは、以下のリクエストを試せます。
+ここでは、以下のリクエストを試すことができます。
 
 - `POST /todos` with a body of `{ "title": "get the milk" }`
 - `GET /todos/{id}` using the ID you received from your `POST`, and see if you
@@ -49,7 +49,7 @@ _注意: アプリケーションを停止するには **CTRL+C** を行いま�
 ### このチュートリアルの続編
 
 `TodoListApplication`上に構築できる機能はまだたくさんあります。以下は、追加機能の追加をガイドする、続編のチュートリアル例です。
-- **RESTベースのジオコーディングサービスとの統合**: 一般的なREST APIサーバーは、SOAPやRESTサービスなど、さまざまなソースからのデータにアクセスする必要があります。ボーナスセクションとして[enhance your Todo application with location-based reminders](todo-tutorial-geocoding-service.md)を学び、LoopBackコネクタが他のサービスからデータをいかに簡単にフェッチするかを体験してください。
+- **RESTベースのジオコーディングサービスとの統合**: 一般的なREST APIサーバーは、SOAPやRESTサービスなど、さまざまなソースからのデータにアクセスする必要があります。ボーナスセクションとして[ジオコーディングサービスと統合する](todo-tutorial-geocoding-service.md)を学び、LoopBackコネクタが他のサービスからデータをいかに簡単にフェッチするかを体験してください。
 
 - **TodoListApplicationを使用して、関連モデルを追加する**: リレーションなど、LoopBack 4のより高度な機能を試してみたい場合は、ここから先の[TodoList tutorial](https://loopback.io/doc/en/lb4/todo-list-tutorial.html) を試してください。
 
