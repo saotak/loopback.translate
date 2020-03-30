@@ -42,6 +42,6 @@ Repository TodoRepository was created in src/repositories/
 
 ### ナビゲーション
 
-前のステップ: [データソースを追加する]](todo-tutorial-datasource.md)
+前のステップ: [データソースを追加する](todo-tutorial-datasource.md)
 
 次のステップ: [コントローラを追加する](todo-tutorial-controller.md)
