@@ -1,14 +1,18 @@
 ---
-lang: en
-title: 'Integrate with a geo-coding service'
+lang: ja
+title: 'ジオコーディングサービスと統合する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-geocoding-service.html
+permalink: /doc/ja/lb4/todo-tutorial-geocoding-service.html
 summary:
-  LoopBack 4 Todo Application Tutorial - Integrate with a geo-coding service
+  LoopBack 4 Todoアプリケーションチュートリアル-ジオコーディングサービスとの統合
 ---
 
-### Services
+### サービス
+
+LoopBackアプリケーションから、他のAPIとWebサービスを呼び出すには、[Service Proxies](../../Services.md)の使用をお勧めします。
+
+サードパーティサービスとの通信の低レベルの実装詳細をカプセル化し、コントローラーなどから簡単に使用できるJavaScript / TypeScript APIを提供するための設計パターンとして、サービスプロキシを使用することをお勧めします。詳しくは、他のAPIおよびWebサービスの呼び出しを参照 してください。
 
 To call other APIs and web services from LoopBack applications, we recommend to
 use [Service Proxies](../../Services.md) as a design pattern for encapsulating
@@ -18,27 +22,17 @@ Controllers. See
 [Calling other APIs and web services](../../Calling-other-APIs-and-Web-Services.md)
 for more details.
 
-In LoopBack, each service proxy is backed by a
-[DataSource](./todo-tutorial-datasource.md), this datasource leverages one of
-the service connectors to make outgoing requests and parse responses returned by
-the service.
+LoopBackでは、各サービスプロキシは[DataSource](./todo-tutorial-datasource.md)によってサポートされ す。このデータソースは、サービスコネクタの1つを利用して、送信リクエストを作成し、サービスから返された応答を解析します。
 
-In our tutorial, we will leverage
-[US Census Geocoder API](https://geocoding.geo.census.gov/geocoder/) to convert
-textual US addresses into GPS coordinates, thus enabling client applications of
-our Todo API to display location-based reminders,
+このチュートリアルでは、 [US Census Geocoder API](https://geocoding.geo.census.gov/geocoder/) を利用して、テキストのUSアドレスをGPS座標に変換します。これにより、Todo APIのクライアントアプリケーションが、ロケーションベースのリマインダーを表示できるようになります。
 
 {% include tip.html content="
-In a real project, you may want to use a geocoding service that covers more
-countries beyond USA and provides faster responses than US Census Geocoder API,
-for example IBM's [Weather Company Data](https://console.bluemix.net/catalog/services/weather-company-data)
-or [Google Maps Platform](https://developers.google.com/maps/documentation/geocoding).
+ヒント： 実際のプロジェクトでは、アメリカ以外の国をカバーし、アメリカの国勢調査ジオコーダーAPIよりも高速なレスポンスを提供するジオコーディングサービス（例えば、IBMの[Weather Company Data](https://console.bluemix.net/catalog/services/weather-company-data)や[Google Maps Platform](https://developers.google.com/maps/documentation/geocoding)などを使用することができます。
 " %}
 
-### Configure the backing datasource
+### 　バッキングデータソースを構成する
 
-Run `lb4 datasource` to define a new datasource connecting to Geocoder REST
-service. When prompted for a connector to use, select "REST services".
+ `lb4 datasource`を実行して、 Geocoder RESTサービスに接続する新しいデータソースを定義します。使用するコネクタを求められたら、「RESTサービス」を選択します。
 
 ```
 $ lb4 datasource
@@ -56,9 +50,7 @@ $ lb4 datasource
 Datasource Geocoder was created in src/datasources/
 ```
 
-Edit the newly created datasource configuration to configure Geocoder API
-endpoints. Configuration options provided by REST Connector are described in our
-docs here: [REST connector](/doc/en/lb4/REST-connector.html).
+新しく作成したデータソース構成を編集して、Geocoder APIエンドポイントを構成します。RESTコネクタによって提供される構成オプションについては、こちらのドキュメント[REST connector](/doc/en/lb4/REST-connector.html)で説明しています。
 
 {% include code-caption.html content="/src/datasources/geocoder.datasource.config.json" %}
 
@@ -92,10 +84,9 @@ docs here: [REST connector](/doc/en/lb4/REST-connector.html).
 }
 ```
 
-### Implement a service provider
+### サービスプロバイダーを実装する
 
-Use the `lb4 service` command and the following inputs to create a geocoder
-service:
+ジオコーダーサービスを作成するため、`lb4 service`コマンドと次のコードを書きます。
 
 ```sh
 lb4 service
@@ -108,8 +99,8 @@ lb4 service
 Service Geocoder was created in src/services/
 ```
 
-In the `src/services/geocoder.service.ts`, we'll add a `GeoPoint` interface and
-a `geocode` function to the `Geocoder` interface as follows:
+次のように、`src/services/geocoder.service.ts`で、 `GeoPoint` インターフェイスと
+`geocode` 関数を、`Geocoder`インターフェイスに追加します。
 
 {% include code-caption.html content="src/services/geocoder.service.ts" %}
 
@@ -149,9 +140,9 @@ export class GeocoderProvider implements Provider<Geocoder> {
 }
 ```
 
-### Enhance Todo model with location data
+### ロケーションデータでTo doモデルを強化する
 
-Add two new properties to our Todo model: `remindAtAddress` and `remindAtGeo`.
+To doモデルに、 `remindAtAddress` and `remindAtGeo`の２つの新しいモデルを追加します。
 
 {% include code-caption.html content="src/models/todo.model.ts" %}
 
@@ -172,13 +163,10 @@ export class Todo extends Entity {
 }
 ```
 
-### Look up address location in the controller
+### コントローラでアドレスの場所を検索します
 
-Finally, modify `TodoController` to look up the address and convert it to GPS
-coordinates when a new Todo item is created.
-
-Import `Geocoder` interface into the `TodoController` and then modify the
-Controller constructor to receive `Geocoder` as a new dependency.
+最後に、`TodoController`を修正して、住所を検索し、新しいTodoアイテムが作成されたときにGPS座標に変換するようにします。
+`TodoController` に`Geocoder` をインポートし、コントローラコンストラクタを変更して、`Geocoder`を新しい依存関係として受け取ります。
 
 {% include code-caption.html content="src/controllers/todo.controller.ts" %}
 
@@ -197,8 +185,8 @@ export class TodoController {
 }
 ```
 
-Modify the `create` method to look up the address provided in `remindAtAddress`
-property and convert it to GPS coordinates stored in `remindAtGeo`.
+ `create`メソッドを修正して、`remindAtAddress`プロパティ内の住所を検索して、`remindAtGeo`内のGPS座標に変更できるようにします。
+プロパティでcreate指定された住所を検索して、にremindAtAddress保存されているGPS座標に変換するようにメソッドを変更しremindAtGeoます。
 
 {% include code-caption.html content="src/controllers/todo.controller.ts" %}
 
@@ -247,13 +235,13 @@ export class TodoController {
 ```
 
 {% include warning.html content="
-Some addresses may not be found and the request will be rejected.
+警告：一部のアドレスは見つからない可能性があり、その場合リクエストは拒否されます。
 " %}
 
 Congratulations! Now your Todo API makes it easy to enter an address for a
 reminder and have the client application show the reminder when the device
 reaches close proximity of that address based on GPS location.
 
-### Navigation
+### ナビゲーション
 
-Previous step: [Putting it all together](todo-tutorial-putting-it-together.md)
+前のステップ: [統合する](todo-tutorial-putting-it-together.md)

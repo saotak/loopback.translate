@@ -1,9 +1,9 @@
 ---
-lang: jp
+lang: ja
 title: 'レポジトリを追加する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/jp/lb4/todo-tutorial-repository.html
+permalink: /doc/ja/lb4/todo-tutorial-repository.html
 summary: LoopBack 4 Todo Application Tutorial - Add a Repository
 ---
 

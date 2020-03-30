@@ -1,9 +1,9 @@
 ---
-lang: jp
+lang: ja
 title: 'データソースを追加する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/jp/lb4/todo-tutorial-datasource.html
+permalink: /doc/ja/lb4/todo-tutorial-datasource.html
 summary: LoopBack 4 Todo Application Tutorial - Add a Datasource
 ---
 

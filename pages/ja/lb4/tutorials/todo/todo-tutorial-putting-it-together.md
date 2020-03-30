@@ -1,37 +1,29 @@
 ---
-lang: en
-title: 'Putting it all together'
+lang: ja
+title: '統合する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-putting-it-together.html
+permalink: /doc/ja/lb4/todo-tutorial-putting-it-together.html
 summary: LoopBack 4 Todo Application Tutorial - Putting it all together
 ---
 
-### Putting it all together
+### 統合する
+これで、全てのアーティファクトが用意できました。これらはすべて[Application](../../Application.md) で自動的にバインドされるので、LoopBackの[Dependency injection](../../Dependency-injection.md) がすべてのアーティファクトを結合できます。
 
-We've got all of our artifacts now, and they are all automatically bound to our
-[Application](../../Application.md) so that LoopBack's
-[Dependency injection](../../Dependency-injection.md) system can tie it all
-together for us!
+LoopBackの[ブートモジュール](https://github.com/strongloop/loopback-next/tree/master/packages/boot)は、コントローラー、リポジトリ、データソース、その他のアーティファクトを自動的に検出し、アプリケーションに挿入して使用します。
 
-LoopBack's
-[boot module](https://github.com/strongloop/loopback-next/tree/master/packages/boot)
-will automatically discover our controllers, repositories, datasources and other
-artifacts and inject them into our application for use.
-
-> **NOTE**: The boot module will discover and inject artifacts that follow our
-> established conventions for artifact directories. Here are some examples:
+> **注意**: ブートモジュールは、アーティファクトディレクトリに対して確立された規則に従うアーティファクトを検出して挿入します。ここではいくつかの例を示します。
 >
-> - Controllers: `./src/controllers`
-> - Datasources: `./src/datasources`
-> - Models: `./src/models`
-> - Repositories: `./src/repositories`
+> - コントローラ: `./src/controllers`
+> - データソース: `./src/datasources`
+> - モデル: `./src/models`
+> - レポジトリ: `./src/repositories`
 >
-> To find out how to customize this behavior, see the
-> [Booters](../../Booting-an-Application.md#booters) section of
-> [Booting an Application](../../Booting-an-Application.md).
+> この動作をカスタマイズする方法を調べるには、　
+> [Booters](../../Booting-an-Application.md#booters)セクションの
+> [Booting an Application](../../Booting-an-Application.md)を参照してください。
 
-Let's try out our application! First, you'll want to start the app.
+アプリケーションを試してみましょう！まず、アプリを起動します。
 
 ```sh
 $ npm start
@@ -39,10 +31,9 @@ $ npm start
 Server is running at http://127.0.0.1:3000
 ```
 
-Next, you can use the [API Explorer](http://localhost:3000/explorer) to browse
-your API and make requests!
+次に、[API Explorer](http://localhost:3000/explorer) でAPIを確認し、リクエストを行えます。
 
-Here are some requests you can try:
+ここでは、以下のリクエストを試せます。
 
 - `POST /todos` with a body of `{ "title": "get the milk" }`
 - `GET /todos/{id}` using the ID you received from your `POST`, and see if you
@@ -50,39 +41,25 @@ Here are some requests you can try:
 - `PATCH /todos/{id}`, using the same ID, with a body of
   `{ "desc": "need milk for cereal" }`
 
-That's it! You've just created your first LoopBack 4 application!
+以上です！最初の LoopBack 4 アプリケーションが作成されました。
 
-_Note: Use **CTRL+C** to stop the application_
+_注意: アプリケーションを停止するには **CTRL+C** を行います_
 
-### Where to go from here
+### このチュートリアルの続編
 
-There are still a ton of features you can use to build on top of the
-`TodoListApplication`. Here are some tutorials that continues off from where we
-left off here to guide you through adding in an additional feature:
+`TodoListApplication`上に構築できる機能はまだたくさんあります。以下は、追加機能の追加をガイドする、続編のチュートリアル例です。
+- **RESTベースのジオコーディングサービスとの統合**: 一般的なREST APIサーバーは、SOAPやRESTサービスなど、さまざまなソースからのデータにアクセスする必要があります。ボーナスセクションとして[enhance your Todo application with location-based reminders](todo-tutorial-geocoding-service.md)を学び、LoopBackコネクタが他のサービスからデータをいかに簡単にフェッチするかを体験してください。
 
-- **Integrate with a REST based geo-coding service**: A typical REST API server
-  needs to access data from a variety of sources, including SOAP or REST
-  services. Continue to the bonus section to learn how LoopBack connectors make
-  it super easy to fetch data from other services and
-  [enhance your Todo application with location-based reminders](todo-tutorial-geocoding-service.md).
-- **Add related Model with TodoListApplication**: If you would like to try out
-  using some of the more advanced features of LoopBack 4 such as relations, try
-  out the
-  [TodoList tutorial](https://loopback.io/doc/en/lb4/todo-list-tutorial.html)
-  which continues off from where we leave here.
+- **TodoListApplicationを使用して、関連モデルを追加する**: リレーションなど、LoopBack 4のより高度な機能を試してみたい場合は、ここから先の[TodoList tutorial](https://loopback.io/doc/en/lb4/todo-list-tutorial.html) を試してください。
 
-### More examples and tutorials
 
-Eager to continue learning about LoopBack 4? Check out our
-[Examples](../../Examples.md) and [Tutorials](../../Tutorials.md) sections to
-find examples for creating your own custom components, sequences and more!
+### その他の例
 
-In fact, this example can be simplified to only defining the model and
-datasource, while still behaving the same. Using
-[`CrudRestComponent`](https://loopback.io/doc/en/lb4/apidocs.rest-crud.crudrestcomponent.html),
-the repository and controller classes can be omitted, as seen in the
-[rest-crud example](https://github.com/strongloop/loopback-next/tree/master/examples/rest-crud).
+LoopBack 4についてさらに知りたいですか?
+[Examples](../../Examples.md) ・ [Tutorials](../../Tutorials.md) セクションをチェックして、目的に合ったカスタムコンポーネント、シーケンスなどを作成する例を見つけてください！
 
-### Navigation
+実際、これらの例は、モデルとデータソースのみを定義するように簡略化できますが、動作は同じです。[`CrudRestComponent`](https://loopback.io/doc/en/lb4/apidocs.rest-crud.crudrestcomponent.html)を使用すると、[rest-crud example](https://github.com/strongloop/loopback-next/tree/master/examples/rest-crud)の例にあるように、リポジトリクラスとコントローラクラスを省略できます。
 
-Previous step: [Add a controller](todo-tutorial-controller.md)
+### ナビゲーション
+
+前のステップ: [コントローラを追加する](todo-tutorial-controller.md)

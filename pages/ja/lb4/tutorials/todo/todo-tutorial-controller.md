@@ -1,32 +1,25 @@
 ---
-lang: en
-title: 'Add a Controller'
+lang: ja
+title: 'コントローラを追加する'
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
-permalink: /doc/en/lb4/todo-tutorial-controller.html
+permalink: /doc/ja/lb4/todo-tutorial-controller.html
 summary: LoopBack 4 Todo Application Tutorial - Add a Controller
 ---
 
-### Controllers
+### コントローラ
 
-In LoopBack 4, [controllers](../../Controllers.md) handle the request-response
-lifecycle for your API. Each function on a controller can be addressed
-individually to handle an incoming request (like a POST request to `/todos`), to
-perform business logic, and to return a response.
+LoopBack 4では、[コントローラ](../../Controllers.md) がAPIの要求/応答ライフサイクルを処理します。コントローラーの各関数は、着信要求（`/todos`へのPOST要求など）を処理し、ビジネスロジックを実行し、レスポンスを返すために個別にアドレス指定できます。
 
-`Controller` is a class that implements operations defined by application's API.
-It implements an application's business logic and acts as a bridge between the
-HTTP/REST API and domain/database models.
+`Controller`は、アプリケーションのAPIによって定義された操作を実装するクラスです。アプリケーションのビジネスロジックを実装し、HTTP / REST APIとドメイン/データベースモデル間のブリッジとして機能します。
 
-In this respect, controllers are the regions _in which most of your business
-logic will live_!
+この点で、コントローラーは、_ビジネスロジックのほとんどが存在する領域_ということになります。
 
-For more information about Controllers, see
-[Controllers](https://loopback.io/doc/en/lb4/Controllers.html).
+詳細については、[コントローラ](https://loopback.io/doc/en/lb4/Controllers.html)をご参照ください。
 
-### Create your controller
+### コントローラを作成する
 
-You can create a REST controller using the CLI as follows:
+以下のCLIコマンドで RESTコントローラを作成できます。 
 
 ```sh
 lb4 controller
@@ -46,44 +39,28 @@ Controller Todo will be created in src/controllers/todo.controller.ts
 Controller Todo was created in src/controllers/
 ```
 
-Let's review the `TodoController` located in
-`src/controllers/todo.controller.ts`. The `@repository` decorator will retrieve
-and inject an instance of the `TodoRepository` whenever an inbound request is
-being handled. The lifecycle of controller objects is per-request, which means
-that a new controller instance is created for each request. As a result, we want
-to inject our `TodoRepository` since the creation of these instances is more
-complex and expensive than making new controller instances.
+`src/controllers/todo.controller.ts`内の `TodoController`を確認してみましょう。`@repository` デコレータはインバウンドリクエストが処理されるたびに、 `TodoRepository`のインスタンスを受け取り、インジェクトします。コントローラオブジェクトのライフサイクルは、リクエストごとです。つまり、リクエストごとに新しいコントローラインスタンスが作成されるということです。これらのインスタンスの作成は、新しいコントローラーインスタンスを作成するよりも複雑で手間がかかるため、結果として、`TodoRepository` のインジェクションを行うこととなります。
 
-{% include note.html content="You can customize the lifecycle of _all_ bindings in LoopBack 4! Controllers can easily be made to use singleton lifecycles to minimize startup costs. For more information, see the [Dependency injection](../../Dependency-injection.md) section of our docs.
-" %}
+{% include note.html content="
+注：LoopBack 4では 、_すべての_バインディングのライフサイクルをカスタマイズできます。コントローラは、シングルトンライフサイクルを使用して、起動コストを最小限に抑えて簡単に作成できます。詳細については、 [Dependency injection](../../Dependency-injection.md)セクションを参照してください。" %}
 
-In this example, there are two new decorators to provide LoopBack with metadata
-about the route, verb and the format of the incoming request body:
+この例では、LoopBackにルート、動詞、および受信リクエスト本文の形式に関するメタデータを提供する2つの新しいデコレーターがあります。
 
-- `@post('/todos')` creates metadata for `@loopback/rest` so that it can
-  redirect requests to this function when the path and verb match.
-- `@requestBody()` associates the OpenAPI schema for a Todo with the body of the
-  request so that LoopBack can validate the format of an incoming request.
+- `@post('/todos')`は、 パスと動詞が一致したときにリクエストをこの関数にリダイレクトできるように、メタデータを `@loopback/rest` に作成します。
+- `@requestBody()` は、 LoopBackが着信要求のフォーマットを検証できるように、TodoのOpenAPIスキーマを要求の本文に関連付けます。
 
-Some additional things to note about this example:
+この例について注意すべき追加事項:
 
-- Routes like `@get('/todos/{id}')` can be paired with the `@param.path`
-  decorators to inject those values at request time into the handler function.
-- LoopBack's `@param` decorator also contains a namespace full of other
-  "subdecorators" like `@param.path`, `@param.query`, and `@param.header` that
-  allow specification of metadata for those parts of a REST request.
-- LoopBack's `@param.path` and `@param.query` also provide subdecorators for
-  specifying the type of certain value primitives, such as
-  `@param.path.number('id')`.
+-  `@get('/todos/{id}')` といったルートは、リクエスト時にこれらの値をハンドラ関数にインジェクトするために`@param.path`のデコレータにペアできます。  。
+- LoopBackの `@param` デコレータは、他の「サブデコレータ」で満たされたネームスペースを含みます。「サブデコレータ」は`@param.path`、`@param.query`、 `@param.header`といったもので、これらはRESTリクエストの部分へのメタデータの指定を可能にします。
+- LoopBackの `@param.path` や `@param.query` は、  `@param.path.number('id')`といった、特定の値のプリミティブなタイプを指定するためのサブデコレータを供給します。
 
-To view the completed file, see the
-[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/controllers/todo.controller.ts).
+完成したファイルは[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/controllers/todo.controller.ts)をご参照ください。
 
-Now that we've wired up the controller, our last step is to tie it all into the
-[Application](todo-tutorial-putting-it-together.md)!
+これでコントローラーを配線しました。最後のステップはすべてを[アプリケーション](todo-tutorial-putting-it-together.md)に結び付けること です！
 
-### Navigation
+### ナビゲージョン
 
-Previous step: [Add a repository](todo-tutorial-repository.md)
+前のステップ: [レポジトリを追加する](todo-tutorial-repository.md)
 
-Final step: [Putting it all together](todo-tutorial-putting-it-together.md)
+最終ステップ: [統合する](todo-tutorial-putting-it-together.md)
