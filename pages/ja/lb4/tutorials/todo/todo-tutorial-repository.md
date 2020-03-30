@@ -9,7 +9,7 @@ summary: LoopBack 4 Todo Application Tutorial - Add a Repository
 ---
 
 ### レポジトリ
-レポジトリパターンは、LoopBack 3と4の間の最も基本的な違いの1つです。LoopBack3では、モデルクラス定義自体を使用してCRUD操作を実行します。LoopBack 4では、これを担当するレイヤーは、モデル自体の定義からリポジトリレイヤーに分離されています。
+レポジトリパターンは、LoopBack 3と4の最も根本的な差異の1つです。LoopBack3では、モデルクラス定義自体を使用してCRUD操作を実行します。LoopBack 4では、これを担当するレイヤーは、モデル自体の定義からリポジトリレイヤーに分離されています。
 
 `Repository`は、基になるデータベースやサービスに対するドメインモデルの、厳密に型指定されたデータアクセス（CRUDなど）操作を提供する、特殊な`Service`インターフェイスを表します。
 
@@ -18,10 +18,6 @@ summary: LoopBack 4 Todo Application Tutorial - Add a Repository
 ### リポジトリを作成する
 
 プロジェクトフォルダー内から`lb4 repository`コマンドを実行し、前のステップで作ったデータソースを使用して、to-doモデルのリポジトリを作成します。`db`データソースは、`DbDataSource`可能なデータソースのリストから、そのクラス名によって現れます。
-From inside the project folder, run the `lb4 repository` command to create a
-repository for your to-do model using the `db` datasource from the previous
-step. The `db` datasource shows up by its class name `DbDataSource` from the
-list of available datasources.
 
 ```sh
 lb4 repository
@@ -38,7 +34,7 @@ Repository TodoRepository was created in src/repositories/
 
 この`src/repositories/index.ts` ファイルにより、成果物のエクスポートが中心になり、インポートも容易になります。
 
-新しく作成された `todo.repository.ts`クラスには、to-doモデルのCRUD操作を実行するために必要な接続があります。これは、Todoモデル定義と「db」データソース設定を活用し[Dependency Injection](https://loopback.io/doc/en/lb4/Dependency-injection.html)をしようしてデータソースを取得します。
+新しく作成された `todo.repository.ts`クラスには、to-doモデルのCRUD操作を実行するために接続が必要です。これは、Todoモデル定義と「db」データソース設定を活用し[Dependency Injection](https://loopback.io/doc/en/lb4/Dependency-injection.html)をしようしてデータソースを取得します。
 
 完成したファイルを表示するには、[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/repositories/todo.repository.ts)をご参照ください。
 
@@ -46,6 +42,6 @@ Repository TodoRepository was created in src/repositories/
 
 ### ナビゲーション
 
-前のステップ: [Add a datasource](todo-tutorial-datasource.md)
+前のステップ: [データソースを追加する]](todo-tutorial-datasource.md)
 
-次のステップ: [Add a controller](todo-tutorial-controller.md)
+次のステップ: [コントローラを追加する](todo-tutorial-controller.md)
