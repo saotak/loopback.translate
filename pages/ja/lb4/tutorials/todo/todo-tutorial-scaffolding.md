@@ -12,7 +12,7 @@ summary: LoopBack 4 Todo Application Tutorial - Create app scaffolding
 
 CLIツールキットには、アプリケーション全体を生成するテンプレートと、既存のアプリケーションのアーティファクト（コントローラー、モデル、リポジトリなど）が付属しています。
 
-ツールキットを使用してアプリケーションを生成するには、`lb4 app`コマンドを実行し、画面のプロンプトに入力します。
+ツールキットを使用してアプリケーションを生成するには、`lb4 app`コマンドを実行し、以下の通り入力します。
 
 ```sh
 $ lb4 app
@@ -33,7 +33,7 @@ $ lb4 app
  Application todo-list was created in todo-list.
 ```
 
-このチュートリアルでは、特定のプロジェクト機能（LoopBackのビルド、eslint、mochaなど）を有効にするためのオプションが表示されたら、それらをすべて有効のままにします。
+なお、このチュートリアルでは、特定のプロジェクト機能（LoopBackのビルド、eslint、mochaなど）を有効にするためのオプションが表示された場合、すべて有効のままにします。
 
 ### ストラクチャ
 
@@ -76,23 +76,23 @@ tsconfig.json
 .mocharc.json
 ```
 
-※ここにリストされていないファイルがある可能性もあります。
+※なお、ここにリストされていないファイルがある可能性もあります。
 
 | ファイル名                                                     | 目的x                                                                                                                                                                                                                                                                                                                                                                  |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `index.ts`                                               | フォルダーのコンテンツのインポートを許可します（他の場所で使用するため）。                                                                                                                                                                                                                                                                                                       |
-| `index.js`                                               | アプリケーションのコンポーネントを接続する、最上位のファイル。|
+| `index.js`                                               | アプリケーションのコンポーネントを接続する、最上位のファイルです。|
 | `package.json`                                           | アプリケーションのパッケージマニフェスト。詳細については、 [package.json](https://docs.npmjs.com/files/package.json) をご参照ください。                                                                                                                                                                                                                                                  |
-| `tsconfig.json`                                          | TypeScriptプロジェクト構成。詳細については、 [tsconfig.json](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) をご参照ください。                                                                                                                                                                                                                                   |
-| `.eslintrc.js`                                           | [ESLint configuration](https://eslint.org/docs/user-guide/configuring)                                                                                                                                                                                                                                                                                                   |
-| `.prettierrc`                                            | [Prettier configuration](https://prettier.io/docs/en/configuration.html)                                                                                                                                                                                                                                                                                                 |
-| `README.md`                                              | 	このアプリケーション用に生成された、MarkdownベースのREADME。                                                                                                                                                                                                                                                                                                               |
-| `LICENSE`                                                | MITライセンスのコピー。このライセンスを使用したくない場合は、このファイルを削除してください。                                                                                                                                                                                                                                                                             |
-| `src/application.ts`                                     | [`RestApplication`](https://loopback.io/doc/en/lb4/apidocs.rest.restapplication.html) デフォルトで拡張されるアプリケーションクラス。これはアプリケーションのルートであり、アプリケーションが構成される場所です。 また、データソースを定義する [`RepositoryMixin`](https://loopback.io/doc/en/lb4/apidocs.repository.repositorymixin.html) の拡張も行います。 |
+| `tsconfig.json`                                          | TypeScriptプロジェクト構成です。詳細については、 [tsconfig.json](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) をご参照ください。                                                                                                                                                                                                                                   |
+| `.eslintrc.js`                                           | [ESLint configuration](https://eslint.org/docs/user-guide/configuring)をご参照ください。                                                                                                                                                                                                                                                                                                   |
+| `.prettierrc`                                            | [Prettier configuration](https://prettier.io/docs/en/configuration.html) をご参照ください。                                                                                                                                                                                                                                                                                                |
+| `README.md`                                              | 	このアプリケーション用に生成された、MarkdownベースのREADMEです。                                                                                                                                                                                                                                                                                                               |
+| `LICENSE`                                                | MITライセンスのコピーです。このライセンスを使用しない場合は、このファイルを削除してください。                                                                                                                                                                                                                                                                             |
+| `src/application.ts`                                     | [`RestApplication`](https://loopback.io/doc/en/lb4/apidocs.rest.restapplication.html) デフォルトで拡張されるアプリケーションクラスです。これはアプリケーションのルートであり、アプリケーションが構成される場所です。 また、データソースを定義する [`RepositoryMixin`](https://loopback.io/doc/en/lb4/apidocs.repository.repositorymixin.html) の拡張も行います。 |
 | `src/index.ts`                                           | マイクロサービスの開始点。このファイルは、アプリケーションのインスタンスを作成し、ブーターを実行してRestServerから、アプリケーションにバインドされている [`RestServer`](https://loopback.io/doc/en/lb4/apidocs.rest.restserver.html) インスタンスを起動させます。                   |
-| `src/sequence.ts`                                        | REST要求/応答中に実行する一連のアクションを定義するために使用される[Sequence](Sequence.md) クラスの拡張。                                                                                                                             |
+| `src/sequence.ts`                                        | REST要求/応答中に実行する一連のアクションを定義するために使用される[Sequence](Sequence.md) クラスの拡張です。                                                                                                                             |
 | `src/controllers/README.md`                              | コントローラディレクトリ、新しいコントローラを生成する方法、および詳細情報の入手先に関する情報を提供します。                                                                                                                                         |
-| `src/controllers/ping.controller.ts`                     |  `/ping`のGETリクエストに応答する基本コントローラ。                                                                                                                                                                                                                                                                                                             |
+| `src/controllers/ping.controller.ts`                     |  `/ping`のGETリクエストに応答する基本コントローラです。                                                                                                                                                                                                                                                                                                             |
 | `src/datasources/README.md`                              | データソースディレクトリ、新しいデータソースを生成する方法、および詳細情報の入手先に関する情報を提供します。                                                                                             |
 | `src/models/README.md`                                   | モデルディレクトリ、新しいモデルの生成方法、および詳細情報の入手先に関する情報を提供します。                                                                                                                                                                                                  |
 | `src/repositories/README.md`                             | リポジトリー・ディレクトリー、新しいリポジトリーの生成方法、および詳細情報の入手先に関する情報を提供します。                                                                                                                                                                                                                                            |
@@ -100,6 +100,6 @@ tsconfig.json
 | `src/__tests__/acceptance/ping.controller.acceptance.ts` | `src/controllers`のpingコントローラを使用するテストのサンプルです。                                                                                                                                                                                                                                                                                                    |
 | `.mocharc.json`                                          | アプリケーションのテストを実行するための[Mocha](https://mochajs.org/) 構成です。                                                                         |
 
-### Navigation
+### ナビゲーション
 
 次のステップ: [Todo Modelを追加する](todo-tutorial-model.md)
