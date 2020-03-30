@@ -1,6 +1,7 @@
 ---
 lang: ja
 title: '統合する'
+layout: translation
 keywords: LoopBack 4.0, LoopBack 4
 sidebar: lb4_sidebar
 permalink: /doc/ja/lb4/todo-tutorial-putting-it-together.html
