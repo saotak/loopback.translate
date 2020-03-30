@@ -52,13 +52,13 @@ Controller Todo was created in src/controllers/
 
 この例について注意すべき追加事項:
 
--  `@get('/todos/{id}')` といったルートは、リクエスト時にこれらの値をハンドラ関数にインジェクトするために`@param.path`のデコレータにペアできます。  。
+-  `@get('/todos/{id}')` といったルートは、リクエスト時にこれらの値をハンドラ関数にインジェクトするために`@param.path`のデコレータにペアできます。
 - LoopBackの `@param` デコレータは、他の「サブデコレータ」で満たされたネームスペースを含みます。「サブデコレータ」は`@param.path`、`@param.query`、 `@param.header`といったもので、これらはRESTリクエストの部分へのメタデータの指定を可能にします。
 - LoopBackの `@param.path` や `@param.query` は、  `@param.path.number('id')`といった、特定の値のプリミティブなタイプを指定するためのサブデコレータを供給します。
 
 完成したファイルは[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/controllers/todo.controller.ts)をご参照ください。
 
-これでコントローラーを配線しました。最後のステップはすべてを[アプリケーション](todo-tutorial-putting-it-together.md)に結び付けること です！
+これでコントローラーを配線しました。最後のステップはすべてを[アプリケーション](todo-tutorial-putting-it-together.md)に結び付けることです！
 
 ### ナビゲージョン
 
