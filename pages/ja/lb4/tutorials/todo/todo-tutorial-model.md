@@ -10,11 +10,10 @@ summary: LoopBack 4 Todo Application Tutorial - Add the Todo Model
 
 ### モデル
 
-ここから、LoopBack 4で使用するデータの表現に取り掛かります。そのために、Todoリストのタスクのインスタンスを表すための、Todoモデルを作成します。Todoモデルは 、リクエストの着信Todoインスタンスを表すための[データ転送オブジェクト](https://en.wikipedia.org/wiki/Data_transfer_object)（DTOとも呼ばれます）と、loopback-datasource-jugglerで使用するためのデータ構造の、両方として機能します。
+ここから、LoopBack 4で使用するデータの表現に取り掛かります。そのために、Todoリストのタスクのインスタンスを表すための、Todoモデルを作成します。Todoモデルは 、リクエストの着信Todoインスタンスを表すための[データ転送オブジェクト](https://en.wikipedia.org/wiki/Data_transfer_object)（DTOとも呼ばれます）と、loopback-datasource-jugglerで使用するためのデータ構造の両方として機能します。
 
 モデルはビジネスドメインオブジェクトを記述し、名前、タイプ、およびその他の制約を持つプロパティのリストを定義します。
-
-また、モデルは、ネットワーク上または異なるシステム間のデータ交換に使用されます。
+また、モデルはネットワーク上または異なるシステム間のデータ交換に使用されます。
 
 モデルの詳細と、LoopBackでのモデルの使用方法については、[モデル](../../Model.md)を参照してください 。
 
@@ -91,6 +90,7 @@ Model Todo was created in src/models/
 ```
 
 完成したファイルを表示するには、[`Todo` example](https://github.com/strongloop/loopback-next/blob/master/examples/todo/src/models/todo.model.ts)を参照してください。
+
 これでモデルができました！次は
 [データソース](todo-tutorial-datasource.md) を追加して実際のCRUD操作を実行できるようにしましょう。
 
